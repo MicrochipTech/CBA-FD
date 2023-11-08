@@ -1,0 +1,3 @@
+protoc text eol=lf
+protoc-gen-nanopb text eol=lf
+protoc-gen-nanopb-py2 text eol=lf

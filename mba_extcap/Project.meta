@@ -1,0 +1,82 @@
+Project {
+
+	LibraryConfig Files, private: true {
+
+		IncludeDir "."
+		IncludeDir "CLI11/include"
+		IncludeDir "../Common"
+
+		Files "**.cpp"
+	}
+
+	ExecutableConfig Debug_GCC, extends: Files {
+		
+		ExternalLibrary "MbaInterface"
+		
+		ExternalLibrarySearchPath "../Debug"
+
+		DefaultToolchain GCC {
+
+			Compiler CPP  {
+				Flags "-std=gnu++17 -O0 -g3"
+			}
+
+			Compiler C {
+				Flags "-std=gnu11 -O0 -g3"
+			}
+
+			Linker {
+			}
+		}
+
+		ArtifactName "../../../Debug/$(MainProjectName).exe"
+	}
+
+	ExecutableConfig Release_GCC, extends: Files {
+
+		ExternalLibrary "MbaInterface"
+		
+		ExternalLibrarySearchPath "../Release"
+
+		DefaultToolchain GCC {
+
+			Compiler CPP  {
+				Flags "-std=gnu++17 -O3"
+			}
+
+			Compiler C {
+				Flags "-std=gnu11 -O3"
+			}
+
+			Linker {
+			}
+		}
+
+		ArtifactName "../../../Release/$(MainProjectName).exe"
+	}
+	
+	ExecutableConfig Release_Windows_MSVC, extends: Files {
+
+		ExternalLibrary "MbaInterface.lib"
+		
+		ExternalLibrarySearchPath "../Release"
+
+		DefaultToolchain MSVC {
+
+			Compiler CPP  {
+				Flags "/W3 /WX- /O2 /Oi /GL /std:c++17"
+			}
+
+			Compiler C {
+				Flags "/W3 /WX- /O2 /Oi /GL"
+			}
+
+			Linker {
+				Flags "/NXCOMPAT /LTCG"
+			}
+		}
+
+		ArtifactName "../../../Release/$(MainProjectName).exe"
+	}
+
+}

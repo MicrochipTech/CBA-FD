@@ -1,0 +1,833 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003" ToolsVersion="14.0">
+  <PropertyGroup>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectVersion>7.0</ProjectVersion>
+    <ToolchainName>com.Atmel.ARMGCC.C</ToolchainName>
+    <ProjectGuid>dce6c7e3-ee26-4d79-826b-08594b9ad897</ProjectGuid>
+    <avrdevice>ATSAMV71Q21B</avrdevice>
+    <avrdeviceseries>none</avrdeviceseries>
+    <OutputType>Executable</OutputType>
+    <Language>C</Language>
+    <OutputFileName>$(MSBuildProjectName)</OutputFileName>
+    <OutputFileExtension>.elf</OutputFileExtension>
+    <OutputDirectory>$(MSBuildProjectDirectory)\$(Configuration)</OutputDirectory>
+    <AssemblyName>AutomotiveBusAnalyzer</AssemblyName>
+    <Name>AutomotiveBusAnalyzer</Name>
+    <RootNamespace>AutomotiveBusAnalyzer</RootNamespace>
+    <ToolchainFlavour>Native</ToolchainFlavour>
+    <KeepTimersRunning>true</KeepTimersRunning>
+    <OverrideVtor>false</OverrideVtor>
+    <CacheFlash>true</CacheFlash>
+    <ProgFlashFromRam>true</ProgFlashFromRam>
+    <RamSnippetAddress>0x20000000</RamSnippetAddress>
+    <UncachedRange />
+    <preserveEEPROM>true</preserveEEPROM>
+    <OverrideVtorValue>exception_table</OverrideVtorValue>
+    <BootSegment>2</BootSegment>
+    <eraseonlaunchrule>1</eraseonlaunchrule>
+    <AsfFrameworkConfig>
+      <framework-data>
+        <options />
+        <configurations />
+        <files />
+        <documentation help="" />
+        <offline-documentation help="" />
+        <dependencies>
+          <content-extension eid="atmel.asf" uuidref="Atmel.ASF" version="3.39.0" />
+        </dependencies>
+      </framework-data>
+    </AsfFrameworkConfig>
+    <avrtool>com.atmel.avrdbg.tool.samice</avrtool>
+    <avrtoolserialnumber>932000476</avrtoolserialnumber>
+    <avrdeviceexpectedsignature>0xA1220E00</avrdeviceexpectedsignature>
+    <com_atmel_avrdbg_tool_samice>
+      <ToolOptions>
+        <InterfaceProperties>
+          <SwdClock>4000000</SwdClock>
+        </InterfaceProperties>
+        <InterfaceName>SWD</InterfaceName>
+        <JlinkConfigFile>C:\git\aba\SW\AutomotiveBusAnalyzer\jlink.config</JlinkConfigFile>
+      </ToolOptions>
+      <ToolType>com.atmel.avrdbg.tool.samice</ToolType>
+      <ToolNumber>932000476</ToolNumber>
+      <ToolName>J-Link</ToolName>
+    </com_atmel_avrdbg_tool_samice>
+    <avrtoolinterface>SWD</avrtoolinterface>
+    <avrtoolinterfaceclock>4000000</avrtoolinterfaceclock>
+    <ResetRule>0</ResetRule>
+    <EraseKey />
+    <custom>
+      <ToolOptions xmlns="">
+        <InterfaceProperties>
+        </InterfaceProperties>
+        <InterfaceName>SWD</InterfaceName>
+      </ToolOptions>
+      <ToolType xmlns="">custom</ToolType>
+      <ToolNumber xmlns="">
+      </ToolNumber>
+      <ToolName xmlns="">Custom Programming Tool</ToolName>
+    </custom>
+    <com_atmel_avrdbg_tool_atmelice>
+      <ToolOptions>
+        <InterfaceProperties>
+          <SwdClock>0</SwdClock>
+        </InterfaceProperties>
+        <InterfaceName>SWD</InterfaceName>
+      </ToolOptions>
+      <ToolType>com.atmel.avrdbg.tool.atmelice</ToolType>
+      <ToolNumber>J41800038714</ToolNumber>
+      <ToolName>Atmel-ICE</ToolName>
+    </com_atmel_avrdbg_tool_atmelice>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)' == 'Release' ">
+    <ToolchainSettings>
+      <ArmGcc>
+        <armgcc.common.outputfiles.hex>True</armgcc.common.outputfiles.hex>
+        <armgcc.common.outputfiles.lss>True</armgcc.common.outputfiles.lss>
+        <armgcc.common.outputfiles.eep>True</armgcc.common.outputfiles.eep>
+        <armgcc.common.outputfiles.bin>True</armgcc.common.outputfiles.bin>
+        <armgcc.common.outputfiles.srec>True</armgcc.common.outputfiles.srec>
+        <armgcc.compiler.symbols.DefSymbols>
+          <ListValues>
+            <Value>NDEBUG</Value>
+            <Value>FIRMWARE_CBA</Value>
+          </ListValues>
+        </armgcc.compiler.symbols.DefSymbols>
+        <armgcc.compiler.directories.IncludePaths>
+          <ListValues>
+            <Value>../../Common/SAMV71_DFP/2.4.182/samv71b/include</Value>
+            <Value>..</Value>
+            <Value>../../Common</Value>
+            <Value>../../Common/CMSIS/include</Value>
+			<Value>../../Common/bsp</Value>
+            <Value>../../Common/bsp/libusb</Value>
+            <Value>../../Common/bsp/libusb/include</Value>
+            <Value>../../Common/bsp/libstoragemedia/include</Value>
+            <Value>../../Common/bsp/libstoragemedia/include/sdmmc</Value>
+            <Value>../../Common/FreeRTOS/Source/include</Value>
+            <Value>../../Common/FreeRTOS/Source/portable/GCC/ARM_CM7/r0p1</Value>
+            <Value>../../Common/nanopb</Value>
+            <Value>../../Common/Generated</Value>
+            <Value>../../Common/fatfs</Value>
+            <Value>../../Common/jsmn</Value>
+            <Value>../../Common/Segger</Value>
+          </ListValues>
+        </armgcc.compiler.directories.IncludePaths>
+        <armgcc.compiler.optimization.level>Optimize most (-O3)</armgcc.compiler.optimization.level>
+        <armgcc.compiler.optimization.PrepareFunctionsForGarbageCollection>True</armgcc.compiler.optimization.PrepareFunctionsForGarbageCollection>
+        <armgcc.compiler.optimization.EnableFastMath>True</armgcc.compiler.optimization.EnableFastMath>
+        <armgcc.compiler.warnings.AllWarnings>True</armgcc.compiler.warnings.AllWarnings>
+        <armgcc.compiler.miscellaneous.OtherFlags>-std=gnu11 -mfloat-abi=softfp -mfpu=fpv4-sp-d16 -Wno-unused-variable -Wno-unused-parameter -Wno-unused-function -Werror=incompatible-pointer-types</armgcc.compiler.miscellaneous.OtherFlags>
+        <armgcc.linker.libraries.Libraries>
+          <ListValues>
+            <Value>libm</Value>
+          </ListValues>
+        </armgcc.linker.libraries.Libraries>
+        <armgcc.linker.libraries.LibrarySearchPaths>
+          <ListValues>
+            <Value>%24(ProjectDir)\Device_Startup</Value>
+          </ListValues>
+        </armgcc.linker.libraries.LibrarySearchPaths>
+        <armgcc.linker.optimization.GarbageCollectUnusedSections>True</armgcc.linker.optimization.GarbageCollectUnusedSections>
+        <armgcc.linker.optimization.EnableFastMath>True</armgcc.linker.optimization.EnableFastMath>
+        <armgcc.linker.memorysettings.ExternalRAM />
+        <armgcc.linker.miscellaneous.LinkerFlags>-Tsamv71q21b_flash.ld</armgcc.linker.miscellaneous.LinkerFlags>
+        <armgcc.assembler.general.IncludePaths>
+          <ListValues>
+            <Value>%24(PackRepoDir)\atmel\SAMV71_DFP\2.3.136\samv71b\include</Value>
+            <Value>%24(PackRepoDir)\arm\CMSIS\4.2.0\CMSIS\Include\</Value>
+          </ListValues>
+        </armgcc.assembler.general.IncludePaths>
+        <armgcc.preprocessingassembler.general.IncludePaths>
+          <ListValues>
+            <Value>%24(PackRepoDir)\atmel\SAMV71_DFP\2.3.136\samv71b\include</Value>
+            <Value>%24(PackRepoDir)\arm\CMSIS\4.2.0\CMSIS\Include\</Value>
+          </ListValues>
+        </armgcc.preprocessingassembler.general.IncludePaths>
+      </ArmGcc>
+    </ToolchainSettings>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)' == 'Debug' ">
+    <ToolchainSettings>
+      <ArmGcc>
+        <armgcc.common.outputfiles.hex>True</armgcc.common.outputfiles.hex>
+        <armgcc.common.outputfiles.lss>True</armgcc.common.outputfiles.lss>
+        <armgcc.common.outputfiles.eep>True</armgcc.common.outputfiles.eep>
+        <armgcc.common.outputfiles.bin>True</armgcc.common.outputfiles.bin>
+        <armgcc.common.outputfiles.srec>True</armgcc.common.outputfiles.srec>
+        <armgcc.compiler.symbols.DefSymbols>
+          <ListValues>
+            <Value>DEBUG</Value>
+            <Value>BOARDTEST</Value>
+            <Value>FIRMWARE_CBA</Value>
+          </ListValues>
+        </armgcc.compiler.symbols.DefSymbols>
+        <armgcc.compiler.directories.IncludePaths>
+          <ListValues>
+            <Value>../../Common/SAMV71_DFP/2.4.182/samv71b/include</Value>
+            <Value>..</Value>
+            <Value>../../Common</Value>
+            <Value>../../Common/CMSIS/include</Value>
+			<Value>../../Common/bsp</Value>
+            <Value>../../Common/bsp/libusb</Value>
+            <Value>../../Common/bsp/libusb/include</Value>
+            <Value>../../Common/bsp/libstoragemedia/include</Value>
+            <Value>../../Common/bsp/libstoragemedia/include/sdmmc</Value>
+            <Value>../../Common/FreeRTOS/Source/include</Value>
+            <Value>../../Common/FreeRTOS/Source/portable/GCC/ARM_CM7/r0p1</Value>
+            <Value>../../Common/nanopb</Value>
+            <Value>../../Common/Generated</Value>
+            <Value>../../Common/fatfs</Value>
+            <Value>../../Common/jsmn</Value>
+            <Value>../../Common/Segger</Value>
+          </ListValues>
+        </armgcc.compiler.directories.IncludePaths>
+        <armgcc.compiler.optimization.PrepareFunctionsForGarbageCollection>True</armgcc.compiler.optimization.PrepareFunctionsForGarbageCollection>
+        <armgcc.compiler.optimization.DebugLevel>Maximum (-g3)</armgcc.compiler.optimization.DebugLevel>
+        <armgcc.compiler.warnings.AllWarnings>True</armgcc.compiler.warnings.AllWarnings>
+        <armgcc.compiler.warnings.ExtraWarnings>True</armgcc.compiler.warnings.ExtraWarnings>
+        <armgcc.compiler.warnings.Pedantic>True</armgcc.compiler.warnings.Pedantic>
+        <armgcc.compiler.miscellaneous.OtherFlags>-std=gnu11 -mfloat-abi=softfp -mfpu=fpv4-sp-d16 -Wno-unused-variable -Wno-unused-parameter -Wno-unused-function -Werror=incompatible-pointer-types</armgcc.compiler.miscellaneous.OtherFlags>
+        <armgcc.linker.libraries.Libraries>
+          <ListValues>
+            <Value>libm</Value>
+          </ListValues>
+        </armgcc.linker.libraries.Libraries>
+        <armgcc.linker.libraries.LibrarySearchPaths>
+          <ListValues>
+            <Value>%24(ProjectDir)\Device_Startup</Value>
+          </ListValues>
+        </armgcc.linker.libraries.LibrarySearchPaths>
+        <armgcc.linker.optimization.GarbageCollectUnusedSections>True</armgcc.linker.optimization.GarbageCollectUnusedSections>
+        <armgcc.linker.memorysettings.ExternalRAM />
+        <armgcc.linker.miscellaneous.LinkerFlags>-Tsamv71q21b_flash.ld</armgcc.linker.miscellaneous.LinkerFlags>
+        <armgcc.assembler.general.IncludePaths>
+          <ListValues>
+            <Value>%24(PackRepoDir)\atmel\SAMV71_DFP\2.3.136\samv71b\include</Value>
+          </ListValues>
+        </armgcc.assembler.general.IncludePaths>
+        <armgcc.assembler.debugging.DebugLevel>Default (-g)</armgcc.assembler.debugging.DebugLevel>
+        <armgcc.preprocessingassembler.general.IncludePaths>
+          <ListValues>
+            <Value>%24(PackRepoDir)\atmel\SAMV71_DFP\2.3.136\samv71b\include</Value>
+            <Value>%24(PackRepoDir)\arm\CMSIS\4.2.0\CMSIS\Include\</Value>
+          </ListValues>
+        </armgcc.preprocessingassembler.general.IncludePaths>
+        <armgcc.preprocessingassembler.debugging.DebugLevel>Default (-Wa,-g)</armgcc.preprocessingassembler.debugging.DebugLevel>
+      </ArmGcc>
+    </ToolchainSettings>
+  </PropertyGroup>
+  <ItemGroup>
+    <Compile Include="..\Common\Bldr_Protocol.h">
+      <SubType>compile</SubType>
+      <Link>Bldr_Protocol.h</Link>
+    </Compile>
+    <Compile Include="..\Common\bsp\board.c">
+      <SubType>compile</SubType>
+      <Link>AutomotiveBusAnalyzer\bsp\board.c</Link>
+    </Compile>
+    <Compile Include="..\Common\bsp\board.h">
+      <SubType>compile</SubType>
+      <Link>AutomotiveBusAnalyzer\bsp\board.h</Link>
+    </Compile>
+    <Compile Include="..\Common\bsp\BoardAbstraction.c">
+      <SubType>compile</SubType>
+      <Link>AutomotiveBusAnalyzer\bsp\BoardAbstraction.c</Link>
+    </Compile>
+    <Compile Include="..\Common\bsp\compiler.h">
+      <SubType>compile</SubType>
+      <Link>AutomotiveBusAnalyzer\bsp\compiler.h</Link>
+    </Compile>
+    <Compile Include="..\Common\bsp\dbg_console.c">
+      <SubType>compile</SubType>
+      <Link>AutomotiveBusAnalyzer\bsp\dbg_console.c</Link>
+    </Compile>
+    <Compile Include="..\Common\bsp\dbg_console.h">
+      <SubType>compile</SubType>
+      <Link>AutomotiveBusAnalyzer\bsp\dbg_console.h</Link>
+    </Compile>
+    <Compile Include="..\Common\bsp\gmac.c">
+      <SubType>compile</SubType>
+      <Link>AutomotiveBusAnalyzer\bsp\gmac.c</Link>
+    </Compile>
+    <Compile Include="..\Common\bsp\gmac.h">
+      <SubType>compile</SubType>
+      <Link>AutomotiveBusAnalyzer\bsp\gmac.h</Link>
+    </Compile>
+    <Compile Include="..\Common\bsp\gmacb_phy.c">
+      <SubType>compile</SubType>
+      <Link>AutomotiveBusAnalyzer\bsp\gmacb_phy.c</Link>
+    </Compile>
+    <Compile Include="..\Common\bsp\gmacb_phy.h">
+      <SubType>compile</SubType>
+      <Link>AutomotiveBusAnalyzer\bsp\gmacb_phy.h</Link>
+    </Compile>
+    <Compile Include="..\Common\bsp\gmacd.c">
+      <SubType>compile</SubType>
+      <Link>AutomotiveBusAnalyzer\bsp\gmacd.c</Link>
+    </Compile>
+    <Compile Include="..\Common\bsp\gmacd.h">
+      <SubType>compile</SubType>
+      <Link>AutomotiveBusAnalyzer\bsp\gmacd.h</Link>
+    </Compile>
+    <Compile Include="..\Common\bsp\gmii.h">
+      <SubType>compile</SubType>
+      <Link>AutomotiveBusAnalyzer\bsp\gmii.h</Link>
+    </Compile>
+    <Compile Include="..\Common\bsp\hsmci.c">
+      <SubType>compile</SubType>
+      <Link>AutomotiveBusAnalyzer\bsp\hsmci.c</Link>
+    </Compile>
+    <Compile Include="..\Common\bsp\hsmci.h">
+      <SubType>compile</SubType>
+      <Link>AutomotiveBusAnalyzer\bsp\hsmci.h</Link>
+    </Compile>
+    <Compile Include="..\Common\bsp\libstoragemedia\include\libstoragemedia.h">
+      <SubType>compile</SubType>
+      <Link>AutomotiveBusAnalyzer\libstoragemedia\libstoragemedia.h</Link>
+    </Compile>
+    <Compile Include="..\Common\bsp\libstoragemedia\include\Media.h">
+      <SubType>compile</SubType>
+      <Link>AutomotiveBusAnalyzer\libstoragemedia\Media.h</Link>
+    </Compile>
+    <Compile Include="..\Common\bsp\libstoragemedia\include\MEDSdcard.h">
+      <SubType>compile</SubType>
+      <Link>AutomotiveBusAnalyzer\libstoragemedia\MEDSdcard.h</Link>
+    </Compile>
+    <Compile Include="..\Common\bsp\libstoragemedia\include\sdmmc\libsdmmc.h">
+      <SubType>compile</SubType>
+      <Link>AutomotiveBusAnalyzer\libstoragemedia\libsdmmc.h</Link>
+    </Compile>
+    <Compile Include="..\Common\bsp\libstoragemedia\include\sdmmc\sdio.h">
+      <SubType>compile</SubType>
+      <Link>AutomotiveBusAnalyzer\libstoragemedia\sdio.h</Link>
+    </Compile>
+    <Compile Include="..\Common\bsp\libstoragemedia\include\sdmmc\sdmmc.h">
+      <SubType>compile</SubType>
+      <Link>AutomotiveBusAnalyzer\libstoragemedia\sdmmc.h</Link>
+    </Compile>
+    <Compile Include="..\Common\bsp\libstoragemedia\include\sdmmc\sdmmc_cmd.h">
+      <SubType>compile</SubType>
+      <Link>AutomotiveBusAnalyzer\libstoragemedia\sdmmc_cmd.h</Link>
+    </Compile>
+    <Compile Include="..\Common\bsp\libstoragemedia\include\sdmmc\sdmmc_trace.h">
+      <SubType>compile</SubType>
+      <Link>AutomotiveBusAnalyzer\libstoragemedia\sdmmc_trace.h</Link>
+    </Compile>
+    <Compile Include="..\Common\bsp\libstoragemedia\source\MEDSdcard.c">
+      <SubType>compile</SubType>
+      <Link>AutomotiveBusAnalyzer\libstoragemedia\MEDSdcard.c</Link>
+    </Compile>
+    <Compile Include="..\Common\bsp\libstoragemedia\source\sdmmc\sdmmc.c">
+      <SubType>compile</SubType>
+      <Link>AutomotiveBusAnalyzer\libstoragemedia\sdmmc.c</Link>
+    </Compile>
+    <Compile Include="..\Common\bsp\mcid.h">
+      <SubType>compile</SubType>
+      <Link>AutomotiveBusAnalyzer\bsp\mcid.h</Link>
+    </Compile>
+    <Compile Include="..\Common\bsp\mcid_dma.c">
+      <SubType>compile</SubType>
+      <Link>AutomotiveBusAnalyzer\bsp\mcid_dma.c</Link>
+    </Compile>
+    <Compile Include="..\Common\bsp\mpu.c">
+      <SubType>compile</SubType>
+      <Link>AutomotiveBusAnalyzer\bsp\mpu.c</Link>
+    </Compile>
+    <Compile Include="..\Common\bsp\mpu.h">
+      <SubType>compile</SubType>
+      <Link>AutomotiveBusAnalyzer\bsp\mpu.h</Link>
+    </Compile>
+    <Compile Include="..\Common\bsp\mcan.c">
+      <SubType>compile</SubType>
+      <Link>AutomotiveBusAnalyzer\bsp\mcan.c</Link>
+    </Compile>
+    <Compile Include="..\Common\bsp\mcan.h">
+      <SubType>compile</SubType>
+      <Link>AutomotiveBusAnalyzer\bsp\mcan.h</Link>
+    </Compile>
+    <Compile Include="..\Common\bsp\pio.c">
+      <SubType>compile</SubType>
+      <Link>AutomotiveBusAnalyzer\bsp\pio.c</Link>
+    </Compile>
+    <Compile Include="..\Common\bsp\pio.h">
+      <SubType>compile</SubType>
+      <Link>AutomotiveBusAnalyzer\bsp\pio.h</Link>
+    </Compile>
+    <Compile Include="..\Common\bsp\pmc.c">
+      <SubType>compile</SubType>
+      <Link>AutomotiveBusAnalyzer\bsp\pmc.c</Link>
+    </Compile>
+    <Compile Include="..\Common\bsp\pmc.h">
+      <SubType>compile</SubType>
+      <Link>AutomotiveBusAnalyzer\bsp\pmc.h</Link>
+    </Compile>
+    <Compile Include="..\Common\bsp\spi.c">
+      <SubType>compile</SubType>
+      <Link>AutomotiveBusAnalyzer\bsp\spi.c</Link>
+    </Compile>
+    <Compile Include="..\Common\bsp\spi.h">
+      <SubType>compile</SubType>
+      <Link>AutomotiveBusAnalyzer\bsp\spi.h</Link>
+    </Compile>
+    <Compile Include="..\Common\bsp\spi_dma.c">
+      <SubType>compile</SubType>
+      <Link>AutomotiveBusAnalyzer\bsp\spi_dma.c</Link>
+    </Compile>
+    <Compile Include="..\Common\bsp\spi_dma.h">
+      <SubType>compile</SubType>
+      <Link>AutomotiveBusAnalyzer\bsp\spi_dma.h</Link>
+    </Compile>
+    <Compile Include="..\Common\bsp\syscalls.c">
+      <SubType>compile</SubType>
+      <Link>AutomotiveBusAnalyzer\bsp\syscalls.c</Link>
+    </Compile>
+    <Compile Include="..\Common\bsp\timetick.c">
+      <SubType>compile</SubType>
+      <Link>AutomotiveBusAnalyzer\bsp\timetick.c</Link>
+    </Compile>
+    <Compile Include="..\Common\bsp\timetick.h">
+      <SubType>compile</SubType>
+      <Link>AutomotiveBusAnalyzer\bsp\timetick.h</Link>
+    </Compile>
+    <Compile Include="..\Common\bsp\tc.c">
+      <SubType>compile</SubType>
+      <Link>AutomotiveBusAnalyzer\bsp\tc.c</Link>
+    </Compile>
+    <Compile Include="..\Common\bsp\tc.h">
+      <SubType>compile</SubType>
+      <Link>AutomotiveBusAnalyzer\bsp\tc.h</Link>
+    </Compile>
+    <Compile Include="..\Common\bsp\twi.c">
+      <SubType>compile</SubType>
+      <Link>AutomotiveBusAnalyzer\bsp\twi.c</Link>
+    </Compile>
+    <Compile Include="..\Common\bsp\twi.h">
+      <SubType>compile</SubType>
+      <Link>AutomotiveBusAnalyzer\bsp\twi.h</Link>
+    </Compile>
+    <Compile Include="..\Common\bsp\twid.c">
+      <SubType>compile</SubType>
+      <Link>AutomotiveBusAnalyzer\bsp\twid.c</Link>
+    </Compile>
+    <Compile Include="..\Common\bsp\twid.h">
+      <SubType>compile</SubType>
+      <Link>AutomotiveBusAnalyzer\bsp\twid.h</Link>
+    </Compile>
+    <Compile Include="..\Common\bsp\wdt.c">
+      <SubType>compile</SubType>
+      <Link>AutomotiveBusAnalyzer\bsp\wdt.c</Link>
+    </Compile>
+    <Compile Include="..\Common\bsp\wdt.h">
+      <SubType>compile</SubType>
+      <Link>AutomotiveBusAnalyzer\bsp\wdt.h</Link>
+    </Compile>
+    <Compile Include="..\Common\bsp\xdmac.h">
+      <SubType>compile</SubType>
+      <Link>AutomotiveBusAnalyzer\bsp\xdmac.h</Link>
+    </Compile>
+    <Compile Include="..\Common\bsp\xdmad.c">
+      <SubType>compile</SubType>
+      <Link>AutomotiveBusAnalyzer\bsp\xdmad.c</Link>
+    </Compile>
+    <Compile Include="..\Common\bsp\xdmad.h">
+      <SubType>compile</SubType>
+      <Link>AutomotiveBusAnalyzer\bsp\xdmad.h</Link>
+    </Compile>
+    <Compile Include="..\Common\fatfs\diskio.c">
+      <SubType>compile</SubType>
+      <Link>AutomotiveBusAnalyzer\fatfs\diskio.c</Link>
+    </Compile>
+    <Compile Include="..\Common\fatfs\diskio.h">
+      <SubType>compile</SubType>
+      <Link>AutomotiveBusAnalyzer\fatfs\diskio.h</Link>
+    </Compile>
+    <Compile Include="..\Common\fatfs\ff.c">
+      <SubType>compile</SubType>
+      <Link>AutomotiveBusAnalyzer\fatfs\ff.c</Link>
+    </Compile>
+    <Compile Include="..\Common\fatfs\ff.h">
+      <SubType>compile</SubType>
+      <Link>AutomotiveBusAnalyzer\fatfs\ff.h</Link>
+    </Compile>
+    <Compile Include="..\Common\fatfs\ffconf.h">
+      <SubType>compile</SubType>
+      <Link>AutomotiveBusAnalyzer\fatfs\ffconf.h</Link>
+    </Compile>
+    <Compile Include="..\Common\fatfs\ffsystem.c">
+      <SubType>compile</SubType>
+      <Link>AutomotiveBusAnalyzer\fatfs\ffsystem.c</Link>
+    </Compile>
+    <Compile Include="..\Common\fatfs\ffunicode.c">
+      <SubType>compile</SubType>
+      <Link>AutomotiveBusAnalyzer\fatfs\ffunicode.c</Link>
+    </Compile>
+    <Compile Include="..\Common\FreeRTOS\Source\croutine.c">
+      <SubType>compile</SubType>
+      <Link>AutomotiveBusAnalyzer\FreeRTOS\Source\croutine.c</Link>
+    </Compile>
+    <Compile Include="..\Common\FreeRTOS\Source\event_groups.c">
+      <SubType>compile</SubType>
+      <Link>AutomotiveBusAnalyzer\FreeRTOS\Source\event_groups.c</Link>
+    </Compile>
+    <Compile Include="..\Common\FreeRTOS\Source\include\croutine.h">
+      <SubType>compile</SubType>
+      <Link>AutomotiveBusAnalyzer\FreeRTOS\Source\include\croutine.h</Link>
+    </Compile>
+    <Compile Include="..\Common\FreeRTOS\Source\include\deprecated_definitions.h">
+      <SubType>compile</SubType>
+      <Link>AutomotiveBusAnalyzer\FreeRTOS\Source\include\deprecated_definitions.h</Link>
+    </Compile>
+    <Compile Include="..\Common\FreeRTOS\Source\include\event_groups.h">
+      <SubType>compile</SubType>
+      <Link>AutomotiveBusAnalyzer\FreeRTOS\Source\include\event_groups.h</Link>
+    </Compile>
+    <Compile Include="..\Common\FreeRTOS\Source\include\FreeRTOS.h">
+      <SubType>compile</SubType>
+      <Link>AutomotiveBusAnalyzer\FreeRTOS\Source\include\FreeRTOS.h</Link>
+    </Compile>
+    <Compile Include="..\Common\FreeRTOS\Source\include\list.h">
+      <SubType>compile</SubType>
+      <Link>AutomotiveBusAnalyzer\FreeRTOS\Source\include\list.h</Link>
+    </Compile>
+    <Compile Include="..\Common\FreeRTOS\Source\include\message_buffer.h">
+      <SubType>compile</SubType>
+      <Link>AutomotiveBusAnalyzer\FreeRTOS\Source\include\message_buffer.h</Link>
+    </Compile>
+    <Compile Include="..\Common\FreeRTOS\Source\include\mpu_prototypes.h">
+      <SubType>compile</SubType>
+      <Link>AutomotiveBusAnalyzer\FreeRTOS\Source\include\mpu_prototypes.h</Link>
+    </Compile>
+    <Compile Include="..\Common\FreeRTOS\Source\include\mpu_wrappers.h">
+      <SubType>compile</SubType>
+      <Link>AutomotiveBusAnalyzer\FreeRTOS\Source\include\mpu_wrappers.h</Link>
+    </Compile>
+    <Compile Include="..\Common\FreeRTOS\Source\include\portable.h">
+      <SubType>compile</SubType>
+      <Link>AutomotiveBusAnalyzer\FreeRTOS\Source\include\portable.h</Link>
+    </Compile>
+    <Compile Include="..\Common\FreeRTOS\Source\include\projdefs.h">
+      <SubType>compile</SubType>
+      <Link>AutomotiveBusAnalyzer\FreeRTOS\Source\include\projdefs.h</Link>
+    </Compile>
+    <Compile Include="..\Common\FreeRTOS\Source\include\queue.h">
+      <SubType>compile</SubType>
+      <Link>AutomotiveBusAnalyzer\FreeRTOS\Source\include\queue.h</Link>
+    </Compile>
+    <Compile Include="..\Common\FreeRTOS\Source\include\semphr.h">
+      <SubType>compile</SubType>
+      <Link>AutomotiveBusAnalyzer\FreeRTOS\Source\include\semphr.h</Link>
+    </Compile>
+    <Compile Include="..\Common\FreeRTOS\Source\include\StackMacros.h">
+      <SubType>compile</SubType>
+      <Link>AutomotiveBusAnalyzer\FreeRTOS\Source\include\StackMacros.h</Link>
+    </Compile>
+    <Compile Include="..\Common\FreeRTOS\Source\include\stack_macros.h">
+      <SubType>compile</SubType>
+      <Link>AutomotiveBusAnalyzer\FreeRTOS\Source\include\stack_macros.h</Link>
+    </Compile>
+    <Compile Include="..\Common\FreeRTOS\Source\include\stream_buffer.h">
+      <SubType>compile</SubType>
+      <Link>AutomotiveBusAnalyzer\FreeRTOS\Source\include\stream_buffer.h</Link>
+    </Compile>
+    <Compile Include="..\Common\FreeRTOS\Source\include\task.h">
+      <SubType>compile</SubType>
+      <Link>AutomotiveBusAnalyzer\FreeRTOS\Source\include\task.h</Link>
+    </Compile>
+    <Compile Include="..\Common\FreeRTOS\Source\include\timers.h">
+      <SubType>compile</SubType>
+      <Link>AutomotiveBusAnalyzer\FreeRTOS\Source\include\timers.h</Link>
+    </Compile>
+    <Compile Include="..\Common\FreeRTOS\Source\list.c">
+      <SubType>compile</SubType>
+      <Link>AutomotiveBusAnalyzer\FreeRTOS\Source\list.c</Link>
+    </Compile>
+    <Compile Include="..\Common\FreeRTOS\Source\portable\GCC\ARM_CM7\r0p1\port.c">
+      <SubType>compile</SubType>
+      <Link>AutomotiveBusAnalyzer\FreeRTOS\Source\portable\GCC\ARM_CM7\r0p1\port.c</Link>
+    </Compile>
+    <Compile Include="..\Common\FreeRTOS\Source\portable\GCC\ARM_CM7\r0p1\portmacro.h">
+      <SubType>compile</SubType>
+      <Link>AutomotiveBusAnalyzer\FreeRTOS\Source\portable\GCC\ARM_CM7\r0p1\portmacro.h</Link>
+    </Compile>
+    <Compile Include="..\Common\FreeRTOS\Source\queue.c">
+      <SubType>compile</SubType>
+      <Link>AutomotiveBusAnalyzer\FreeRTOS\Source\queue.c</Link>
+    </Compile>
+    <Compile Include="..\Common\FreeRTOS\Source\stream_buffer.c">
+      <SubType>compile</SubType>
+      <Link>AutomotiveBusAnalyzer\FreeRTOS\Source\stream_buffer.c</Link>
+    </Compile>
+    <Compile Include="..\Common\FreeRTOS\Source\tasks.c">
+      <SubType>compile</SubType>
+      <Link>AutomotiveBusAnalyzer\FreeRTOS\Source\tasks.c</Link>
+    </Compile>
+    <Compile Include="..\Common\FreeRTOS\Source\timers.c">
+      <SubType>compile</SubType>
+      <Link>AutomotiveBusAnalyzer\FreeRTOS\Source\timers.c</Link>
+    </Compile>
+    <Compile Include="..\Common\Generated\aba.api.pb.c">
+      <SubType>compile</SubType>
+      <Link>AutomotiveBusAnalyzer\protobuf\aba.api.pb.c</Link>
+    </Compile>
+    <Compile Include="..\Common\Generated\aba.api.pb.h">
+      <SubType>compile</SubType>
+      <Link>AutomotiveBusAnalyzer\protobuf\aba.api.pb.h</Link>
+    </Compile>
+    <Compile Include="..\Common\Generated\aba.can.pb.c">
+      <SubType>compile</SubType>
+      <Link>AutomotiveBusAnalyzer\protobuf\aba.can.pb.c</Link>
+    </Compile>
+    <Compile Include="..\Common\Generated\aba.can.pb.h">
+      <SubType>compile</SubType>
+      <Link>AutomotiveBusAnalyzer\protobuf\aba.can.pb.h</Link>
+    </Compile>
+    <Compile Include="..\Common\Generated\aba.cxpi.pb.c">
+      <SubType>compile</SubType>
+      <Link>AutomotiveBusAnalyzer\protobuf\aba.cxpi.pb.c</Link>
+    </Compile>
+    <Compile Include="..\Common\Generated\aba.cxpi.pb.h">
+      <SubType>compile</SubType>
+      <Link>AutomotiveBusAnalyzer\protobuf\aba.cxpi.pb.h</Link>
+    </Compile>
+    <Compile Include="..\Common\Generated\aba.lin.pb.c">
+      <SubType>compile</SubType>
+      <Link>AutomotiveBusAnalyzer\protobuf\aba.lin.pb.c</Link>
+    </Compile>
+    <Compile Include="..\Common\Generated\aba.lin.pb.h">
+      <SubType>compile</SubType>
+      <Link>AutomotiveBusAnalyzer\protobuf\aba.lin.pb.h</Link>
+    </Compile>
+    <Compile Include="..\Common\Generated\aba.sent.pb.c">
+      <SubType>compile</SubType>
+      <Link>AutomotiveBusAnalyzer\protobuf\aba.sent.pb.c</Link>
+    </Compile>
+    <Compile Include="..\Common\Generated\aba.sent.pb.h">
+      <SubType>compile</SubType>
+      <Link>AutomotiveBusAnalyzer\protobuf\aba.sent.pb.h</Link>
+    </Compile>
+    <Compile Include="..\Common\jsmn\jsmn.h">
+      <SubType>compile</SubType>
+      <Link>AutomotiveBusAnalyzer\jsmn\jsmn.h</Link>
+    </Compile>
+    <Compile Include="..\Common\bsp\libusb\common\core\USBDescriptors.c">
+      <SubType>compile</SubType>
+      <Link>AutomotiveBusAnalyzer\libusb\common\core\USBDescriptors.c</Link>
+    </Compile>
+    <Compile Include="..\Common\bsp\libusb\common\core\USBD_HAL.c">
+      <SubType>compile</SubType>
+      <Link>AutomotiveBusAnalyzer\libusb\common\core\USBD_HAL.c</Link>
+    </Compile>
+    <Compile Include="..\Common\bsp\libusb\common\core\USBRequests.c">
+      <SubType>compile</SubType>
+      <Link>AutomotiveBusAnalyzer\libusb\common\core\USBRequests.c</Link>
+    </Compile>
+    <Compile Include="..\Common\bsp\libusb\device\core\USBD.c">
+      <SubType>compile</SubType>
+      <Link>AutomotiveBusAnalyzer\libusb\device\core\USBD.c</Link>
+    </Compile>
+    <Compile Include="..\Common\bsp\libusb\device\core\USBDDriver.c">
+      <SubType>compile</SubType>
+      <Link>AutomotiveBusAnalyzer\libusb\device\core\USBDDriver.c</Link>
+    </Compile>
+    <Compile Include="..\Common\bsp\libusb\device\core\USBDDriverCallbacks.c">
+      <SubType>compile</SubType>
+      <Link>AutomotiveBusAnalyzer\libusb\device\core\USBDDriverCallbacks.c</Link>
+    </Compile>
+    <Compile Include="..\Common\bsp\libusb\include\USBD.h">
+      <SubType>compile</SubType>
+      <Link>AutomotiveBusAnalyzer\libusb\include\USBD.h</Link>
+    </Compile>
+    <Compile Include="..\Common\bsp\libusb\include\USBDDriver.h">
+      <SubType>compile</SubType>
+      <Link>AutomotiveBusAnalyzer\libusb\include\USBDDriver.h</Link>
+    </Compile>
+    <Compile Include="..\Common\bsp\libusb\include\USBDescriptors.h">
+      <SubType>compile</SubType>
+      <Link>AutomotiveBusAnalyzer\libusb\include\USBDescriptors.h</Link>
+    </Compile>
+    <Compile Include="..\Common\bsp\libusb\include\USBD_Config.h">
+      <SubType>compile</SubType>
+      <Link>AutomotiveBusAnalyzer\libusb\include\USBD_Config.h</Link>
+    </Compile>
+    <Compile Include="..\Common\bsp\libusb\include\USBD_HAL.h">
+      <SubType>compile</SubType>
+      <Link>AutomotiveBusAnalyzer\libusb\include\USBD_HAL.h</Link>
+    </Compile>
+    <Compile Include="..\Common\bsp\libusb\include\USBD_LEDs.h">
+      <SubType>compile</SubType>
+      <Link>AutomotiveBusAnalyzer\libusb\include\USBD_LEDs.h</Link>
+    </Compile>
+    <Compile Include="..\Common\bsp\libusb\include\USBLib_Trace.h">
+      <SubType>compile</SubType>
+      <Link>AutomotiveBusAnalyzer\libusb\include\USBLib_Trace.h</Link>
+    </Compile>
+    <Compile Include="..\Common\bsp\libusb\include\USBLib_Types.h">
+      <SubType>compile</SubType>
+      <Link>AutomotiveBusAnalyzer\libusb\include\USBLib_Types.h</Link>
+    </Compile>
+    <Compile Include="..\Common\bsp\libusb\include\USBRequests.h">
+      <SubType>compile</SubType>
+      <Link>AutomotiveBusAnalyzer\libusb\include\USBRequests.h</Link>
+    </Compile>
+    <Compile Include="..\Common\bsp\libusb\usb.h">
+      <SubType>compile</SubType>
+      <Link>AutomotiveBusAnalyzer\libusb\usb.h</Link>
+    </Compile>
+    <Compile Include="..\Common\bsp\libusb\usbhs.h">
+      <SubType>compile</SubType>
+      <Link>AutomotiveBusAnalyzer\libusb\usbhs.h</Link>
+    </Compile>
+    <Compile Include="..\Common\nanopb\pb.h">
+      <SubType>compile</SubType>
+      <Link>AutomotiveBusAnalyzer\protobuf\pb.h</Link>
+    </Compile>
+    <Compile Include="..\Common\nanopb\pb_common.c">
+      <SubType>compile</SubType>
+      <Link>AutomotiveBusAnalyzer\protobuf\pb_common.c</Link>
+    </Compile>
+    <Compile Include="..\Common\nanopb\pb_common.h">
+      <SubType>compile</SubType>
+      <Link>AutomotiveBusAnalyzer\protobuf\pb_common.h</Link>
+    </Compile>
+    <Compile Include="..\Common\nanopb\pb_decode.c">
+      <SubType>compile</SubType>
+      <Link>AutomotiveBusAnalyzer\protobuf\pb_decode.c</Link>
+    </Compile>
+    <Compile Include="..\Common\nanopb\pb_decode.h">
+      <SubType>compile</SubType>
+      <Link>AutomotiveBusAnalyzer\protobuf\pb_decode.h</Link>
+    </Compile>
+    <Compile Include="..\Common\nanopb\pb_encode.c">
+      <SubType>compile</SubType>
+      <Link>AutomotiveBusAnalyzer\protobuf\pb_encode.c</Link>
+    </Compile>
+    <Compile Include="..\Common\nanopb\pb_encode.h">
+      <SubType>compile</SubType>
+      <Link>AutomotiveBusAnalyzer\protobuf\pb_encode.h</Link>
+    </Compile>
+    <Compile Include="..\Common\USB_Commands.h">
+      <SubType>compile</SubType>
+      <Link>USB_Commands.h</Link>
+    </Compile>
+    <Compile Include="..\Common\USB_Descriptor.h">
+      <SubType>compile</SubType>
+      <Link>USB_Descriptor.h</Link>
+    </Compile>
+    <Compile Include="ABAControl.c">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="ABAControl.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="config.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="DebugHandler.c">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="Device_Startup\startup_samv71q21b.c">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="Device_Startup\system_samv71q21b.c">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="FreeRTOSConfig.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="main.c">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="mcan_config.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="returnQueue.c">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="returnQueue.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="rtos.c">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="rtos.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="settings.c">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="settings.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="tasks\task_CAN.c">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="tasks\task_CAN.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="tasks\task_CAN_cfg.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="tasks\task_LOG.c">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="tasks\task_LOG.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="tasks\task_USB.c">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="tasks\task_USB.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="USBDDriverDescriptors.c">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="versions.h">
+      <SubType>compile</SubType>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="AutomotiveBusAnalyzer\" />
+    <Folder Include="AutomotiveBusAnalyzer\bsp\" />
+    <Folder Include="AutomotiveBusAnalyzer\FreeRTOS\" />
+    <Folder Include="AutomotiveBusAnalyzer\FreeRTOS\Source\" />
+    <Folder Include="AutomotiveBusAnalyzer\FreeRTOS\Source\include\" />
+    <Folder Include="AutomotiveBusAnalyzer\FreeRTOS\Source\portable\" />
+    <Folder Include="AutomotiveBusAnalyzer\FreeRTOS\Source\portable\GCC\" />
+    <Folder Include="AutomotiveBusAnalyzer\FreeRTOS\Source\portable\GCC\ARM_CM7\" />
+    <Folder Include="AutomotiveBusAnalyzer\FreeRTOS\Source\portable\GCC\ARM_CM7\r0p1\" />
+    <Folder Include="AutomotiveBusAnalyzer\libusb\" />
+    <Folder Include="AutomotiveBusAnalyzer\libusb\common\" />
+    <Folder Include="AutomotiveBusAnalyzer\libusb\common\core\" />
+    <Folder Include="AutomotiveBusAnalyzer\libusb\device\" />
+    <Folder Include="AutomotiveBusAnalyzer\libusb\device\core\" />
+    <Folder Include="AutomotiveBusAnalyzer\libusb\include\" />
+    <Folder Include="AutomotiveBusAnalyzer\fatfs" />
+    <Folder Include="AutomotiveBusAnalyzer\libstoragemedia" />
+    <Folder Include="AutomotiveBusAnalyzer\jsmn" />
+    <Folder Include="AutomotiveBusAnalyzer\protobuf\" />
+    <Folder Include="Device_Startup\" />
+    <Folder Include="tasks" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="..\Common\jsmn\LICENSE.txt">
+      <SubType>compile</SubType>
+      <Link>AutomotiveBusAnalyzer\jsmn\LICENSE.txt</Link>
+    </None>
+    <None Include="debughooks.py">
+      <SubType>compile</SubType>
+    </None>
+    <None Include="Device_Startup\samv71q21b_flash.ld">
+      <SubType>compile</SubType>
+    </None>
+    <None Include="Device_Startup\samv71_flash.ld">
+      <SubType>compile</SubType>
+    </None>
+    <None Include="Project.meta">
+      <SubType>compile</SubType>
+    </None>
+  </ItemGroup>
+  <Import Project="$(AVRSTUDIO_EXE_PATH)\\Vs\\Compiler.targets" />
+</Project>

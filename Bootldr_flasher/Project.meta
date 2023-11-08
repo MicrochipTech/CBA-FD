@@ -1,0 +1,95 @@
+Project {
+
+	ExecutableConfig LocalCommon {
+		IncludeDir "."
+		IncludeDir "../Common"
+		
+		Files "Main.cpp"
+		Files "Bootloader_flash.cpp"
+		Files "../Common/CRC.c"
+	}
+	
+	ExecutableConfig Release_Windows_MSVC, extends: LocalCommon {
+		
+		IncludeDir "../Common/libusb-1.0.26/include/libusb-1.0"
+
+		ExternalLibrary "libusb-1.0.lib"
+		
+		ExternalLibrarySearchPath "Common/libusb-1.0.26/MS64/dll"
+
+		DefaultToolchain MSVC {
+
+			Compiler CPP  {
+				Flags "/W3 /WX- /O2 /Oi /GL /std:c++17 /wd4200"
+			}
+
+			Compiler C {
+				Flags "/W3 /WX- /O2 /Oi /GL"
+			}
+
+			Linker {
+				Flags "/LTCG"
+			}
+		}
+
+		ArtifactName "../../../Release/$(MainProjectName).exe"
+		
+		PostSteps {
+			CommandLine "copy ..\Common\libusb-1.0.26\MS64\dll\libusb-1.0.dll ..\Release"
+		}
+	}
+	
+	ExecutableConfig Debug_Windows, extends: LocalCommon {
+
+		IncludeDir "../Common/libusb-1.0.26/include/libusb-1.0"
+
+		ExternalLibrary "usb-1.0"
+		ExternalLibrarySearchPath "Common/libusb-1.0.26/MinGW64/dll"
+
+		DefaultToolchain GCC {
+
+			Compiler CPP  {
+				Flags "-std=gnu++17"
+			}
+
+			Compiler C {
+				Flags "-std=gnu11"
+			}
+
+			Linker {
+			}
+		}
+
+		ArtifactName "../../../Debug/$(MainProjectName).exe"
+		
+		PostSteps {
+			CommandLine "copy \"$(ABA_MINGW)\libgcc_s_seh-1.dll\" ..\Debug"
+			CommandLine "copy \"$(ABA_MINGW)\libstdc++-6.dll\" ..\Debug"
+			CommandLine "copy \"$(ABA_MINGW)\libwinpthread-1.dll\" ..\Debug"
+			CommandLine "copy ..\Common\libusb-1.0.26\MinGW64\dll\libusb-1.0.dll ..\Debug"
+		}
+	}
+
+	ExecutableConfig Debug_Linux, extends: LocalCommon {
+
+		IncludeDir "/usr/include/libusb-1.0/"
+
+		ExternalLibrary "usb-1.0"
+
+		DefaultToolchain GCC {
+
+			Compiler CPP  {
+				Flags "-std=gnu++17"
+			}
+
+			Compiler C {
+				Flags "-std=gnu11"
+			}
+
+			Linker {
+			}
+		}
+
+		ArtifactName "../../../Debug/$(MainProjectName)"
+	}
+}

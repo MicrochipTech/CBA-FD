@@ -1,0 +1,84 @@
+Project {
+	
+	LibraryConfig Files, private: true {
+		IncludeDir "."
+		IncludeDir "../Common"
+
+		Files "ABAControl.c"
+		Files "DebugHandler.c"
+		Files "main.c"
+		Files "rtos.c"
+		Files "returnQueue.c"
+		Files "settings.c"
+		Files "tasks/task_CAN.c"
+		Files "tasks/task_LOG.c"
+		Files "tasks/task_USB.c"
+		Files "USBDDriverDescriptors.c"
+		Files "Device_Startup/startup_samv71q21b.c"
+		Files "Device_Startup/system_samv71q21b.c"
+		
+		Set MBA_COMMIT_ID, cmd: "ruby ../Common/setVar.rb MBA_COMMIT_ID DEADC0DE"
+	}
+	
+	ExecutableConfig Debug, extends: Files {
+
+		Dependency Common, config: V71_Application
+
+		DefaultToolchain GCC {
+
+			Compiler C, command: "arm-none-eabi-gcc" {
+				Define "DEBUG"
+				Define "FIRMWARE_CBA"
+				Define "BOARDTEST"
+				Flags "-mcpu=cortex-m7 -O0 -ffunction-sections -fno-exceptions -mlong-calls -g3 -Wall -std=gnu99 -mfloat-abi=softfp -mfpu=fpv4-sp-d16"
+				Define "__SAMV71Q21B__"
+			}
+
+			Archiver command: "arm-none-eabi-ar" {
+			}
+
+			Linker command: "arm-none-eabi-gcc" {
+				Flags "-LDevice_Startup -Wl,--gc-sections -mcpu=cortex-m7 -Wl,-Map=../Debug/MBA.map"
+				LibPrefixFlags "-Wl,--start-group -Wl,--whole-archive"
+				LibPostfixFlags "-Wl,--end-group -Wl,--no-whole-archive"
+			}
+		}
+
+		PostSteps {
+			CommandLine "arm-none-eabi-objcopy -O binary ../Debug/MBA.elf ../Debug/MBA.bin"
+		}
+
+		LinkerScript "Device_Startup/samv71q21b_flash.ld"
+		ArtifactName "../../../Debug/MBA.elf"
+	}
+	
+	ExecutableConfig Release, extends: Files {
+
+		Dependency Common, config: V71_Application
+
+		DefaultToolchain GCC {
+
+			Compiler C, command: "arm-none-eabi-gcc" {
+				Define "FIRMWARE_CBA"
+				Flags "-mcpu=cortex-m7 -O3 -ffunction-sections -fno-exceptions -mlong-calls -Wall -std=gnu99 -mfloat-abi=softfp -mfpu=fpv4-sp-d16"
+				Define "__SAMV71Q21B__"
+			}
+
+			Archiver command: "arm-none-eabi-ar" {
+			}
+
+			Linker command: "arm-none-eabi-gcc" {
+				Flags "-LDevice_Startup -Wl,--gc-sections -mcpu=cortex-m7 -Wl,-Map=../Release/MBA.map"
+				LibPrefixFlags "-Wl,--start-group -Wl,--whole-archive"
+				LibPostfixFlags "-Wl,--end-group -Wl,--no-whole-archive"
+			}
+		}
+
+		PostSteps {
+			CommandLine "arm-none-eabi-objcopy -O binary ../Release/MBA.elf ../Release/MBA.bin"
+		}
+
+		LinkerScript "Device_Startup/samv71q21b_flash.ld"
+		ArtifactName "../../../Release/MBA.elf"
+	}
+}

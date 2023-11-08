@@ -1,0 +1,97 @@
+Project {
+
+	ExecutableConfig Bootloader_Common {
+		
+		IncludeDir "."
+		IncludeDir "../Common"
+		IncludeDir "../Common/bsp"
+		IncludeDir "../Common/CMSIS/include"
+		IncludeDir "../Common/bsp/libusb"
+		IncludeDir "../Common/bsp/libusb/include"
+		IncludeDir "$(PACK_DIR)"
+
+		Files "Main.c"
+		Files "Bootloader.c"
+		Files "USBDDriverDescriptors.c"
+		Files "Device_Startup/startup_samv71q21b.c"
+		Files "Device_Startup/system_samv71q21b.c"
+		Files "../Common/bsp/syscalls.c"
+		Files "../Common/bsp/BoardAbstraction.c"
+	}
+
+	ExecutableConfig Debug, extends: Bootloader_Common {
+
+		Dependency Common, config: V71_Bootloader
+
+		DefaultToolchain GCC {
+
+			Compiler CPP, command: "arm-none-eabi-g++" {
+				Define "DEBUG"
+				Define "FIRMWARE_BOOTLOADER"
+				Define "__SAMV71Q21B__"
+				Flags "-mcpu=cortex-m7 -O0 -ffunction-sections -mlong-calls -g3 -Wall -std=gnu++0x"
+			}
+
+			Compiler C, command: "arm-none-eabi-gcc" {
+				Define "DEBUG"
+				Define "FIRMWARE_BOOTLOADER"
+				Define "__SAMV71Q21B__"
+				Flags "-mcpu=cortex-m7 -O0 -ffunction-sections -fno-exceptions -mlong-calls -g3 -Wall -std=gnu99"
+			}
+
+			Archiver command: "arm-none-eabi-ar" {
+			}
+
+			Linker command: "arm-none-eabi-g++" {
+				Flags "-LDevice_Startup -Wl,--gc-sections -mcpu=cortex-m7 -Wl,-Map=../Debug/Bootloader.map"
+				LibPrefixFlags "-Wl,--start-group -Wl,--whole-archive"
+				LibPostfixFlags "-Wl,--end-group -Wl,--no-whole-archive"
+			}
+		}
+		
+		PostSteps {
+			CommandLine "arm-none-eabi-objcopy -O binary ../Debug/Bootloader.elf ../Debug/Bootloader.bin"
+		}
+
+		LinkerScript "Device_Startup/samv71q21b_flash.ld"
+		ArtifactName "../../../Debug/Bootloader.elf"
+	}
+
+	ExecutableConfig Release, extends: Bootloader_Common {
+
+		Dependency Common, config: V71_Bootloader
+
+		DefaultToolchain GCC {
+
+			Compiler CPP, command: "arm-none-eabi-g++" {
+				Define "FIRMWARE_BOOTLOADER"
+				Define "__SAMV71Q21B__"
+				Flags "-mcpu=cortex-m7 -Os -ffunction-sections -mlong-calls -g3 -Wall -std=gnu++0x"
+			}
+
+			Compiler C, command: "arm-none-eabi-gcc" {
+				Define "FIRMWARE_BOOTLOADER"
+				Define "TRACE_LEVEL=0"
+				Define "NDEBUG"
+				Define "__SAMV71Q21B__"
+				Flags "-mcpu=cortex-m7 -Os -ffunction-sections -fno-exceptions -mlong-calls -g3 -Wall -std=gnu99"
+			}
+
+			Archiver command: "arm-none-eabi-ar" {
+			}
+
+			Linker command: "arm-none-eabi-g++" {
+				Flags "-LDevice_Startup -Wl,--gc-sections -mcpu=cortex-m7 -Wl,-Map=../Release/Bootloader.map"
+				LibPrefixFlags "-Wl,--start-group -Wl,--whole-archive"
+				LibPostfixFlags "-Wl,--end-group -Wl,--no-whole-archive"
+			}
+		}
+
+		PostSteps {
+			CommandLine "arm-none-eabi-objcopy -O binary ../Release/Bootloader.elf ../Release/Bootloader.bin"
+		}
+
+		LinkerScript "Device_Startup/samv71q21b_flash.ld"
+		ArtifactName "../../../Release/Bootloader.elf"
+	}
+}

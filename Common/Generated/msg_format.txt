@@ -1,0 +1,7 @@
+Transfer      ::= Message Message*
+Message       ::= Type Subtype Command PayloadLength Payload
+Type          ::= Command | Data
+Command       ::= Specific command for subtype
+Subtype       ::= ABA | CAN
+PayloadLength ::= 0..506
+Payload       ::= ProtoBuf | RawMessage

@@ -1,0 +1,132 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Quelldateien">
+      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
+      <Extensions>cpp;c;cc;cxx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    </Filter>
+    <Filter Include="Headerdateien">
+      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
+      <Extensions>h;hh;hpp;hxx;hm;inl;inc;xsd</Extensions>
+    </Filter>
+    <Filter Include="Ressourcendateien">
+      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
+      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
+    </Filter>
+    <Filter Include="Quelldateien\Nanopb">
+      <UniqueIdentifier>{154a46a8-0df2-45b6-b04f-c0d7ce897aba}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Quelldateien\Nanopb\Generated">
+      <UniqueIdentifier>{3406cb3d-d27f-4498-b408-7813292cd316}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Headerdateien\Nanopb">
+      <UniqueIdentifier>{97e453af-e306-4386-a458-6b96180a28d6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Headerdateien\Nanopb\Generated">
+      <UniqueIdentifier>{638e2b0d-c122-473a-a1d3-f4dad098cbd6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Quelldateien\Protocol">
+      <UniqueIdentifier>{fe3324a2-7252-45f7-836b-af034b08304a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Headerdateien\Protocol">
+      <UniqueIdentifier>{f80412da-e4e4-4f3a-ba43-105286973e31}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="AbaInterface.cpp">
+      <Filter>Quelldateien</Filter>
+    </ClCompile>
+    <ClCompile Include="AbaUSB.cpp">
+      <Filter>Quelldateien</Filter>
+    </ClCompile>
+    <ClCompile Include="AbaCAN.cpp">
+      <Filter>Quelldateien</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Common\Generated\aba.can.pb.c">
+      <Filter>Quelldateien\Nanopb\Generated</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Common\nanopb\pb_encode.c">
+      <Filter>Quelldateien\Nanopb</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Common\nanopb\pb_decode.c">
+      <Filter>Quelldateien\Nanopb</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Common\nanopb\pb_common.c">
+      <Filter>Quelldateien\Nanopb</Filter>
+    </ClCompile>
+    <ClCompile Include="AbaApi.cpp">
+      <Filter>Quelldateien</Filter>
+    </ClCompile>
+    <ClCompile Include="CanInterface.cpp">
+      <Filter>Quelldateien\Protocol</Filter>
+    </ClCompile>
+    <ClCompile Include="ApiInterface.cpp">
+      <Filter>Quelldateien\Protocol</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Common\Generated\aba.api.pb.c">
+      <Filter>Quelldateien\Nanopb\Generated</Filter>
+    </ClCompile>
+    <ClCompile Include="AbaHandle.cpp">
+      <Filter>Quelldateien</Filter>
+    </ClCompile>
+    <ClCompile Include="deviceListenerCb.cpp">
+      <Filter>Quelldateien</Filter>
+    </ClCompile>
+    <ClCompile Include="Windows\AbaIWindows.cpp">
+      <Filter>Quelldateien</Filter>
+    </ClCompile>
+    <ClCompile Include="Windows\deviceListener.cpp">
+      <Filter>Quelldateien</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\Common\USB_Commands.h">
+      <Filter>Headerdateien</Filter>
+    </ClInclude>
+    <ClInclude Include="AbaUSB.h">
+      <Filter>Headerdateien</Filter>
+    </ClInclude>
+    <ClInclude Include="AbaCAN.h">
+      <Filter>Headerdateien</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Common\nanopb\pb_decode.h">
+      <Filter>Headerdateien\Nanopb</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Common\nanopb\pb.h">
+      <Filter>Headerdateien\Nanopb</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Common\nanopb\pb_common.h">
+      <Filter>Headerdateien\Nanopb</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Common\nanopb\pb_encode.h">
+      <Filter>Headerdateien\Nanopb</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Common\Generated\aba.can.pb.h">
+      <Filter>Headerdateien\Nanopb\Generated</Filter>
+    </ClInclude>
+    <ClInclude Include="AbaApi.h">
+      <Filter>Headerdateien</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Common\Generated\aba.api.pb.h">
+      <Filter>Headerdateien\Nanopb\Generated</Filter>
+    </ClInclude>
+    <ClInclude Include="CanInterface.h">
+      <Filter>Headerdateien\Protocol</Filter>
+    </ClInclude>
+    <ClInclude Include="ApiInterface.h">
+      <Filter>Headerdateien\Protocol</Filter>
+    </ClInclude>
+    <ClInclude Include="AbaHandle.h">
+      <Filter>Headerdateien</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Common\MbaInterface.h">
+      <Filter>Headerdateien</Filter>
+    </ClInclude>
+    <ClInclude Include="deviceListenerCb.h">
+      <Filter>Headerdateien</Filter>
+    </ClInclude>
+    <ClInclude Include="Windows\deviceListener.h">
+      <Filter>Headerdateien</Filter>
+    </ClInclude>
+  </ItemGroup>
+</Project>

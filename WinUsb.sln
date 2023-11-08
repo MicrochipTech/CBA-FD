@@ -1,0 +1,37 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.29409.12
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Bootldr_flasher", "Bootldr_flasher\Bootldr_flasher.vcxproj", "{6779DF8C-92A9-4690-9232-3743B8E4DAE2}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "MbaInterface", "AbaInterface\MbaInterface.vcxproj", "{C0A2E4CC-3CA7-4807-B50F-B8A002244336}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "mba_extcap", "mba_extcap\mba_extcap.vcxproj", "{DC0561C6-8BC0-4C00-B6FC-73D73C5B7607}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|x64 = Debug|x64
+		Release|x64 = Release|x64
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{6779DF8C-92A9-4690-9232-3743B8E4DAE2}.Debug|x64.ActiveCfg = Debug|x64
+		{6779DF8C-92A9-4690-9232-3743B8E4DAE2}.Debug|x64.Build.0 = Debug|x64
+		{6779DF8C-92A9-4690-9232-3743B8E4DAE2}.Release|x64.ActiveCfg = Release|x64
+		{6779DF8C-92A9-4690-9232-3743B8E4DAE2}.Release|x64.Build.0 = Release|x64
+		{C0A2E4CC-3CA7-4807-B50F-B8A002244336}.Debug|x64.ActiveCfg = Debug|x64
+		{C0A2E4CC-3CA7-4807-B50F-B8A002244336}.Debug|x64.Build.0 = Debug|x64
+		{C0A2E4CC-3CA7-4807-B50F-B8A002244336}.Release|x64.ActiveCfg = Release|x64
+		{C0A2E4CC-3CA7-4807-B50F-B8A002244336}.Release|x64.Build.0 = Release|x64
+		{DC0561C6-8BC0-4C00-B6FC-73D73C5B7607}.Debug|x64.ActiveCfg = Debug|x64
+		{DC0561C6-8BC0-4C00-B6FC-73D73C5B7607}.Debug|x64.Build.0 = Debug|x64
+		{DC0561C6-8BC0-4C00-B6FC-73D73C5B7607}.Release|x64.ActiveCfg = Release|x64
+		{DC0561C6-8BC0-4C00-B6FC-73D73C5B7607}.Release|x64.Build.0 = Release|x64
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {DC41C593-2790-44FF-A322-EA8D1D776B3C}
+	EndGlobalSection
+EndGlobal

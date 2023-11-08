@@ -1,0 +1,169 @@
+Project {
+
+	LibraryConfig Debug_Linux {
+
+		IncludeDir "."
+		IncludeDir "/usr/include/libusb-1.0/"
+
+		Files "AbaApi.cpp"
+		Files "AbaCAN.cpp"
+		Files "AbaUSB.cpp"
+		Files "AbaHandle.cpp"
+		Files "AbaInterface.cpp"
+		Files "ApiInterface.cpp"
+		Files "CanInterface.cpp"
+		Files "deviceListenerCb.cpp"
+		Files "Linux/AbaILinux.cpp"
+
+		Dependency "Common", config: PC_Application
+
+		ExternalLibrary "usb-1.0"
+
+		DefaultToolchain GCC {
+
+			Compiler CPP  {
+				Define "MBA_ABA"
+				Define "MBA_EXPORT"
+				Define "UNICODE"
+				Define "_UNICODE"
+				Flags "-std=gnu++17 -O0 -g3"
+			}
+
+			Compiler C {
+				Define "MBA_ABA"
+				Define "MBA_EXPORT"
+				Define "UNICODE"
+				Define "_UNICODE"
+				Flags "-std=gnu11 -O0 -g3"
+			}
+
+			Linker command: "g++" {
+				Flags "-shared"
+			}
+		}
+
+		ArtifactName "../../../Debug/MbaInterface.so"	
+	}
+
+	ExecutableConfig LocalCommonWindows {
+	
+		IncludeDir "."
+		IncludeDir "../Common/libusb-1.0.26/include/libusb-1.0"
+
+		Files "AbaApi.cpp"
+		Files "AbaCAN.cpp"
+		Files "AbaUSB.cpp"
+		Files "AbaHandle.cpp"
+		Files "AbaInterface.cpp"
+		Files "ApiInterface.cpp"
+		Files "CanInterface.cpp"
+		Files "deviceListenerCb.cpp"
+		Files "Windows/deviceListener.cpp"
+
+		Dependency "Common", config: PC_Application
+	}
+
+	ExecutableConfig Debug_Windows_GCC, extends: LocalCommonWindows {
+		
+		Files "Windows/AbaIWindows.cpp"
+
+		ExternalLibrary "usb-1.0"
+		
+		ExternalLibrarySearchPath "Common/libusb-1.0.26/MinGW64/dll"
+
+		DefaultToolchain GCC {
+
+			Compiler CPP  {
+				Define "MBA_ABA"
+				Define "MBA_EXPORT"
+				Define "UNICODE"
+				Define "_UNICODE"
+				Flags "-std=gnu++17 -O0 -g3"
+			}
+
+			Compiler C {
+				Define "MBA_ABA"
+				Define "MBA_EXPORT"
+				Define "UNICODE"
+				Define "_UNICODE"
+				Flags "-std=gnu11 -O0 -g3"
+			}
+
+			Linker command: "g++" {
+				Flags "-shared -Wl,--out-implib,../Debug/MbaInterface.lib"
+			}
+		}
+
+		ArtifactName "../../../Debug/MbaInterface.dll"
+	}
+	
+	ExecutableConfig Release_Windows_GCC, extends: LocalCommonWindows {
+		
+		Files "Windows/AbaIWindows.cpp"
+
+		ExternalLibrary "usb-1.0"
+		
+		ExternalLibrarySearchPath "Common/libusb-1.0.26/MinGW64/dll"
+
+		DefaultToolchain GCC {
+
+			Compiler CPP  {
+				Define "MBA_ABA"
+				Define "MBA_EXPORT"
+				Define "UNICODE"
+				Define "_UNICODE"
+				Flags "-std=gnu++17 -O3"
+			}
+
+			Compiler C {
+				Define "MBA_ABA"
+				Define "MBA_EXPORT"
+				Define "UNICODE"
+				Define "_UNICODE"
+				Flags "-std=gnu11 -O3"
+			}
+
+			Linker command: "g++" {
+				Flags "-shared -Wl,--out-implib,../Release/MbaInterface.lib"
+			}
+		}
+
+		ArtifactName "../../../Release/MbaInterface.dll"
+	}
+	
+	ExecutableConfig Release_Windows_MSVC, extends: LocalCommonWindows {
+		
+		Files "Windows/AbaIWindows.cpp"
+		
+		ExternalLibrary "libusb-1.0.lib"
+
+		ExternalLibrarySearchPath "Common/libusb-1.0.26/MS64/dll"
+
+		DefaultToolchain MSVC {
+
+			Compiler CPP  {
+				Define "MBA_ABA"
+				Define "MBA_EXPORT"
+				Define "UNICODE"
+				Define "_UNICODE"
+				Define "PB_NO_STATIC_ASSERT"
+				Flags "/W3 /WX- /O2 /Oi /GL /std:c++17 /wd4200"
+			}
+
+			Compiler C {
+				Define "MBA_ABA"
+				Define "MBA_EXPORT"
+				Define "UNICODE"
+				Define "_UNICODE"
+				Define "PB_NO_STATIC_ASSERT"
+				Flags "/W3 /WX- /O2 /Oi /GL"
+			}
+
+			Linker {
+				Flags "/DYNAMICBASE /DLL /NXCOMPAT /LTCG user32.lib"
+			}
+		}
+
+		ArtifactName "../../../Release/MbaInterface.dll"
+	}
+}

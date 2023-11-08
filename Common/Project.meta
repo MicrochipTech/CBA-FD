@@ -1,0 +1,98 @@
+Project {
+	
+	LibraryConfig V71_DUT {
+	
+		IncludeDir "SAMV71_DFP/2.4.182/samv71b/include", inherit: true
+		IncludeDir "$(MainProjectDir)"
+
+		IncludeDir ".", inherit: true
+		IncludeDir "bsp", inherit: true
+		IncludeDir "CMSIS/include", inherit: true
+
+		Files "CRC.c"
+		Files "bsp/board.c"
+		Files "bsp/dbg_console.c"
+		Files "bsp/efc.c"
+		Files "bsp/flashd.c"
+		Files "bsp/mpu.c"
+		Files "bsp/pio.c"
+		Files "bsp/pmc.c"
+		Files "bsp/timetick.c"
+		Files "bsp/wdt.c"
+		Files "bsp/twi.c"
+		Files "bsp/twid.c"
+		Files "bsp/led.c"
+	}
+	
+	LibraryConfig V71_Bootloader {
+
+		IncludeDir "SAMV71_DFP/2.4.182/samv71b/include", inherit: true
+		IncludeDir "$(MainProjectDir)"
+
+		IncludeDir "."
+		IncludeDir "bsp", inherit: true
+		IncludeDir "CMSIS/include", inherit: true
+		IncludeDir "bsp/libusb", inherit: true
+		IncludeDir "bsp/libusb/include", inherit: true
+		IncludeDir "Generated", inherit: true
+
+		Files "CRC.c"
+		Files "bsp/board.c"
+		Files "bsp/dbg_console.c"
+		Files "bsp/efc.c"
+		Files "bsp/flashd.c"
+		Files "bsp/mpu.c"
+		Files "bsp/pio.c"
+		Files "bsp/pmc.c"
+		Files "bsp/timetick.c"
+		Files "bsp/wdt.c"
+		Files "bsp/twi.c"
+		Files "bsp/twid.c"
+		Files "bsp/libusb/common/core/*.c"
+		Files "bsp/libusb/device/core/*.c"
+	}
+
+	LibraryConfig V71_Application {
+
+		IncludeDir "SAMV71_DFP/2.4.182/samv71b/include", inherit: true
+		IncludeDir "$(MainProjectDir)"
+
+		IncludeDir "."
+		IncludeDir "bsp", inherit: true
+		IncludeDir "bsp/libstoragemedia/include", inherit: true
+		IncludeDir "bsp/libstoragemedia/include/sdmmc", inherit: true
+		IncludeDir "CMSIS/include", inherit: true
+		IncludeDir "FreeRTOS/Source/include", inherit: true
+		IncludeDir "FreeRTOS/Source/portable/GCC/ARM_CM7/r0p1", inherit: true
+		IncludeDir "Generated", inherit: true
+		IncludeDir "bsp/libusb", inherit: true
+		IncludeDir "bsp/libusb/include", inherit: true
+		IncludeDir "nanopb", inherit: true
+		IncludeDir "fatfs", inherit: true
+		IncludeDir "jsmn", inherit: true
+		IncludeDir "Segger", inherit: true
+		
+		Files "bsp/*.c"
+		Files "bsp/libstoragemedia/source/**/*.c"
+		Files "fatfs/*.c"
+		Files "FreeRTOS/Source/*.c"
+		Files "FreeRTOS/Source/portable/GCC/ARM_CM7/r0p1/port.c"
+		Files "Generated/*.c"
+		Files "bsp/libusb/common/core/*.c"
+		Files "bsp/libusb/device/core/*.c"
+		Files "nanopb/*.c"
+		Files "Segger/*.c"
+	}
+
+	LibraryConfig PC_Application {
+
+		IncludeDir ".", inherit: true
+		IncludeDir "Generated", inherit: true
+		IncludeDir "nanopb", inherit: true
+
+		Files "Generated/*.c"
+		Files "nanopb/*.c"
+	}
+
+
+}

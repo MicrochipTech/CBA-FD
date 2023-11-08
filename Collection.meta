@@ -1,0 +1,32 @@
+Collection Debug {
+	Project "AbaInterface", config: "Debug_Windows_GCC"
+	Project "AutomotiveBusAnalyzer", config: "Debug"
+	Project "Bootldr_flasher", config: "Debug_Windows"
+	Project "Bootloader", config: "Debug"
+	Project "mba_extcap", config: "Debug_GCC"
+}
+
+Collection Release {
+	Project "AbaInterface", config: "Release_Windows_MSVC", args: "--no-case-check"
+	Project "AutomotiveBusAnalyzer", config: "Release"
+	Project "Bootldr_flasher", config: "Release_Windows_MSVC", args: "--no-case-check"
+	Project "Bootloader", config: "Release"
+	Project "mba_extcap", config: "Release_Windows_MSVC", args: "--no-case-check"
+}
+
+Collection Linux_Driver {
+	Project "Bootldr_flasher", config: "Debug_Linux"
+	Project "AbaInterface", config: "Debug_Linux"
+}
+
+Collection Linux_Firmware {
+	Project "AutomotiveBusAnalyzer", config: "Debug"
+	Project "Bootloader", config: "Debug"
+}
+
+Collection Linux_All {
+	Project "Bootldr_flasher", config: "Debug_Linux"
+	Project "AbaInterface", config: "Debug_Linux"
+	Project "AutomotiveBusAnalyzer", config: "Debug"
+	Project "Bootloader", config: "Debug"
+}

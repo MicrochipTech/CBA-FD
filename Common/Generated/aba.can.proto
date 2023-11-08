@@ -1,0 +1,137 @@
+syntax = "proto3";
+import "nanopb.proto";
+
+package aba.can;
+
+/*
+ * Available CAN devices.
+ */
+enum eCanDevice {
+	MCAN0 = 0;
+	MCAN1 = 1;
+}
+
+/*
+ * Available operating modes.
+ */
+enum eCanMode {
+	MODE_CLASSIC = 0;
+	MODE_FDNISO  = 1;
+	MODE_FDISO   = 2;
+}
+
+/*
+ * Protobuf does not support flag enums.
+ * Make sure the format assigned in message is uint32 and not eCanOperationMode
+ */
+enum eCanSpecialMode {
+	MODE_NORMAL       = 0x0;
+	MODE_LISTEN       = 0x1;
+	MODE_LOOPBACK_INT = 0x2;
+	MODE_LOOPBACK_EXT = 0x3;
+	MODE_INIT         = 0x4;
+}
+
+/*
+ * CAN frame format types
+ */
+enum eCanFrameType {
+	TYPE_CLASSIC_STD = 0;
+	TYPE_CLASSIC_XTD = 1;
+	TYPE_FD_STD      = 2;
+	TYPE_FD_XTD      = 3;
+	TYPE_FDBRS_STD   = 4;
+	TYPE_FDBRS_XTD   = 5;
+}
+
+enum eCanCommands {
+	SET_BITRATE     = 0;
+	GET_BITRATE     = 1;
+	RX_MSG          = 2;
+	TX_MSG          = 3;
+	TX_TIMEOUT      = 4;
+	SET_MODE        = 5;
+	GET_MODE        = 6;
+	GET_ERRORCNT    = 7;
+	RESET           = 8;
+	PHY_MAINTAIN    = 9;
+	SET_PERSISTANCE = 10;
+	GET_PERSISTANCE = 11;
+	DBG_READ_REG    = 64;
+}
+
+enum eCanLastErrorCode {
+	NO_ERROR    = 0;
+	STUFF_ERROR = 1;
+	FORM_ERROR  = 2;
+	ACK_ERROR   = 3;
+	BIT1_ERROR  = 4;
+	BIT0_ERROR  = 5;
+	CRC_ERROR   = 6;
+	NO_CHANGE   = 7;
+}
+
+/*
+ * Presets are stored within the PC application.
+ * Writing registers values allows configuration of non-standard bitrates.
+ */
+message CanSpeed {
+    eCanDevice device  = 1;
+    uint32 nsjw        = 2;
+    uint32 nseg1       = 3;
+    uint32 nseg2       = 4;
+    uint32 nscale      = 5;
+    uint32 dsjw        = 6;
+    uint32 dseg1       = 7;
+    uint32 dseg2       = 8;
+    uint32 dscale      = 9;
+    uint32 tdc         = 10;
+    uint32 tdcf        = 11;
+    uint32 tdco        = 12;
+}
+
+/*
+ * CAN devices can be set to CAN2.0, NON-ISO and ISO CAN-FD.
+ * It's also possible to enter listen-only mode.
+ */
+message CanMode {
+	eCanDevice device  = 1;
+	eCanMode mode      = 2;
+	eCanSpecialMode specialMode = 3;
+	uint32 autoRetryEnabled  = 4;
+}
+
+/*
+ * Get the transmit and receive error counter values.
+ */
+message CanError {
+	eCanDevice device  = 1;
+	uint32 busOff      = 2;
+	uint32 rec         = 3;
+	uint32 tec         = 4;
+	uint32 lec		   = 5;
+	uint64 timestamp   = 6;
+}
+
+/*
+ * CAN message object.
+ * Direction (Tx/Rx) is handled by lower protocol layer.
+ */
+message CanMessage {
+	eCanDevice device  = 1;
+	uint32 canId       = 2;
+	uint32 dlc         = 3;
+	uint32 frameType   = 4;
+	bytes message      = 5 [(nanopb).max_size = 64];
+	uint64 timestamp   = 6;
+}
+
+message CanDeviceWrapper {
+	eCanDevice device  = 1;
+	uint32 flag        = 2;
+}
+
+message DbgReadRegister {
+	uint32 addr        = 1;
+	uint32 value       = 2;
+}

@@ -1,0 +1,39 @@
+syntax = "proto3";
+import "nanopb.proto";
+import "aba.can.proto";
+
+package aba.eeprom;
+
+/* We currently do not used the fields specified by aba.can.proto   */
+/* These fields would required a change for eeprom persistance,     */
+/* but I don't want to make the change now. It can be done later... */
+
+message eeCanSpeed
+{
+	uint32 nsjw        = 1  [(nanopb).int_size = IS_8];
+    uint32 nseg1       = 2  [(nanopb).int_size = IS_8];
+    uint32 nseg2       = 3  [(nanopb).int_size = IS_8];
+    uint32 nscale      = 4  [(nanopb).int_size = IS_8];
+    uint32 dsjw        = 5  [(nanopb).int_size = IS_8];
+    uint32 dseg1       = 6  [(nanopb).int_size = IS_8];
+    uint32 dseg2       = 7  [(nanopb).int_size = IS_8];
+    uint32 dscale      = 8  [(nanopb).int_size = IS_8];
+    uint32 tdc         = 9  [(nanopb).int_size = IS_8];
+    uint32 tdcf        = 10 [(nanopb).int_size = IS_8];
+    uint32 tdco        = 11 [(nanopb).int_size = IS_8];
+};
+
+message eeCanDefaults
+{
+	eeCanSpeed speed                    = 1;
+	aba.can.eCanMode mode               = 2;
+	aba.can.eCanSpecialMode specialMode = 3;
+	uint32 autoRetryEnabled             = 4 [(nanopb).int_size = IS_8];
+};
+
+message eeprom_content
+{
+	eeCanDefaults can0 = 1;
+	eeCanDefaults can1 = 2;
+	uint32 crc16       = 3 [(nanopb).int_size = IS_16];
+};

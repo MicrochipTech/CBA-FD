@@ -1,0 +1,42 @@
+syntax = "proto3";
+import "nanopb.proto";
+
+package aba.api;
+
+enum eVersion
+{
+	option allow_alias = true;
+	VER_RESERVED = 0;
+	VER_API = 1;
+	VER_CAN = 1;
+}
+
+enum eCommand
+{
+	CMD_RESET      = 0;
+	CMD_BOOTLOADER = 1;
+	CMD_SAMBA      = 2;
+	CMD_GETVERSION = 3;
+	CMD_TIMESTAMP  = 4;
+	CMD_TWINKLE    = 5;
+}
+
+message CmdMessage
+{
+	eCommand cmd = 1;
+}
+
+message Timestamp
+{
+	uint64 timestamp = 1;
+}
+
+message Versions
+{
+	uint32 firmware = 1;
+	eVersion api = 2;
+	eVersion can = 3;
+	uint32 bootloader = 4;
+	uint32 hardware = 5;
+	uint32 hash = 6;
+}

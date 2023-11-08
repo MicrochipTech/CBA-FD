@@ -1,0 +1,4 @@
+*.pb.c
+*.pb.h
+versions.h
+versions.py

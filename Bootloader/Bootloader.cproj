@@ -1,0 +1,430 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003" ToolsVersion="14.0">
+  <PropertyGroup>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectVersion>7.0</ProjectVersion>
+    <ToolchainName>com.Atmel.ARMGCC.C</ToolchainName>
+    <ProjectGuid>{8156155f-c8c2-4291-bb37-beef304265d4}</ProjectGuid>
+    <avrdevice>ATSAMV71Q21B</avrdevice>
+    <avrdeviceseries>none</avrdeviceseries>
+    <OutputType>Executable</OutputType>
+    <Language>C</Language>
+    <OutputFileName>$(MSBuildProjectName)</OutputFileName>
+    <OutputFileExtension>.elf</OutputFileExtension>
+    <OutputDirectory>$(MSBuildProjectDirectory)\$(Configuration)</OutputDirectory>
+    <AssemblyName>Bootloader</AssemblyName>
+    <Name>Bootloader</Name>
+    <RootNamespace>Bootloader</RootNamespace>
+    <ToolchainFlavour>Native</ToolchainFlavour>
+    <KeepTimersRunning>true</KeepTimersRunning>
+    <OverrideVtor>false</OverrideVtor>
+    <CacheFlash>true</CacheFlash>
+    <ProgFlashFromRam>true</ProgFlashFromRam>
+    <RamSnippetAddress>0x20000000</RamSnippetAddress>
+    <UncachedRange />
+    <preserveEEPROM>true</preserveEEPROM>
+    <OverrideVtorValue>exception_table</OverrideVtorValue>
+    <BootSegment>2</BootSegment>
+    <eraseonlaunchrule>1</eraseonlaunchrule>
+    <AsfFrameworkConfig>
+      <framework-data>
+        <options />
+        <configurations />
+        <files />
+        <documentation help="" />
+        <offline-documentation help="" />
+        <dependencies>
+          <content-extension eid="atmel.asf" uuidref="Atmel.ASF" version="3.39.0" />
+        </dependencies>
+      </framework-data>
+    </AsfFrameworkConfig>
+    <avrtool>com.atmel.avrdbg.tool.samice</avrtool>
+    <avrtoolserialnumber>28018296</avrtoolserialnumber>
+    <avrdeviceexpectedsignature>0xA1220E00</avrdeviceexpectedsignature>
+    <com_atmel_avrdbg_tool_samice>
+      <ToolOptions>
+        <InterfaceProperties>
+          <SwdClock>4000000</SwdClock>
+        </InterfaceProperties>
+        <InterfaceName>SWD</InterfaceName>
+        <JlinkConfigFile>C:\GIT\aba\SW\Bootloader\jlink.config</JlinkConfigFile>
+      </ToolOptions>
+      <ToolType>com.atmel.avrdbg.tool.samice</ToolType>
+      <ToolNumber>28018296</ToolNumber>
+      <ToolName>SAM-ICE</ToolName>
+    </com_atmel_avrdbg_tool_samice>
+    <avrtoolinterface>SWD</avrtoolinterface>
+    <avrtoolinterfaceclock>4000000</avrtoolinterfaceclock>
+    <com_atmel_avrdbg_tool_edbg>
+      <ToolOptions>
+        <InterfaceProperties>
+          <SwdClock>0</SwdClock>
+        </InterfaceProperties>
+        <InterfaceName>SWD</InterfaceName>
+      </ToolOptions>
+      <ToolType>com.atmel.avrdbg.tool.edbg</ToolType>
+      <ToolNumber>ATML2407110200008736</ToolNumber>
+      <ToolName>EDBG</ToolName>
+    </com_atmel_avrdbg_tool_edbg>
+    <ResetRule>0</ResetRule>
+    <EraseKey />
+    <com_atmel_avrdbg_tool_atmelice>
+      <ToolOptions>
+        <InterfaceProperties>
+          <SwdClock>0</SwdClock>
+        </InterfaceProperties>
+        <InterfaceName>SWD</InterfaceName>
+      </ToolOptions>
+      <ToolType>com.atmel.avrdbg.tool.atmelice</ToolType>
+      <ToolNumber>J41800038714</ToolNumber>
+      <ToolName>Atmel-ICE</ToolName>
+    </com_atmel_avrdbg_tool_atmelice>
+    <custom>
+      <ToolOptions>
+        <InterfaceProperties>
+          <SwdClock>4000000</SwdClock>
+        </InterfaceProperties>
+        <InterfaceName>
+        </InterfaceName>
+      </ToolOptions>
+      <ToolType>custom</ToolType>
+      <ToolNumber>
+      </ToolNumber>
+      <ToolName>Custom Programming Tool</ToolName>
+    </custom>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)' == 'Release' ">
+    <ToolchainSettings>
+      <ArmGcc>
+  <armgcc.common.outputfiles.hex>True</armgcc.common.outputfiles.hex>
+  <armgcc.common.outputfiles.lss>True</armgcc.common.outputfiles.lss>
+  <armgcc.common.outputfiles.eep>True</armgcc.common.outputfiles.eep>
+  <armgcc.common.outputfiles.bin>True</armgcc.common.outputfiles.bin>
+  <armgcc.common.outputfiles.srec>True</armgcc.common.outputfiles.srec>
+  <armgcc.compiler.symbols.DefSymbols>
+    <ListValues>
+      <Value>NDEBUG</Value>
+      <Value>FIRMWARE_BOOTLOADER</Value>
+    </ListValues>
+  </armgcc.compiler.symbols.DefSymbols>
+  <armgcc.compiler.directories.IncludePaths>
+    <ListValues>
+      <Value>../../Common/SAMV71_DFP/2.4.182/samv71b/include</Value>
+      <Value>../../Common/CMSIS/include</Value>
+      <Value>../../Common/bsp</Value>
+      <Value>../../Common/bsp/libusb</Value>
+      <Value>../../Common/bsp/libusb/include</Value>
+      <Value>../../Common</Value>
+      <Value>..</Value>
+    </ListValues>
+  </armgcc.compiler.directories.IncludePaths>
+  <armgcc.compiler.optimization.level>Optimize for size (-Os)</armgcc.compiler.optimization.level>
+  <armgcc.compiler.optimization.PrepareFunctionsForGarbageCollection>True</armgcc.compiler.optimization.PrepareFunctionsForGarbageCollection>
+  <armgcc.compiler.optimization.DebugLevel>Maximum (-g3)</armgcc.compiler.optimization.DebugLevel>
+  <armgcc.compiler.warnings.AllWarnings>True</armgcc.compiler.warnings.AllWarnings>
+  <armgcc.linker.libraries.LibrarySearchPaths>
+    <ListValues>
+      <Value>%24(ProjectDir)\Device_Startup</Value>
+    </ListValues>
+  </armgcc.linker.libraries.LibrarySearchPaths>
+  <armgcc.linker.optimization.GarbageCollectUnusedSections>True</armgcc.linker.optimization.GarbageCollectUnusedSections>
+  <armgcc.linker.memorysettings.ExternalRAM />
+  <armgcc.linker.miscellaneous.LinkerFlags>-Tsamv71q21b_flash.ld</armgcc.linker.miscellaneous.LinkerFlags>
+  <armgcc.assembler.general.IncludePaths>
+    <ListValues>
+      <Value>%24(PackRepoDir)\atmel\SAMV71_DFP\2.2.129\samv71b\include</Value>
+      <Value>%24(PackRepoDir)\arm\CMSIS\4.2.0\CMSIS\Include\</Value>
+    </ListValues>
+  </armgcc.assembler.general.IncludePaths>
+  <armgcc.preprocessingassembler.general.IncludePaths>
+    <ListValues>
+      <Value>%24(PackRepoDir)\atmel\SAMV71_DFP\2.2.129\samv71b\include</Value>
+      <Value>%24(PackRepoDir)\arm\CMSIS\4.2.0\CMSIS\Include\</Value>
+    </ListValues>
+  </armgcc.preprocessingassembler.general.IncludePaths>
+</ArmGcc>
+    </ToolchainSettings>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)' == 'Debug' ">
+    <ToolchainSettings>
+      <ArmGcc>
+  <armgcc.common.outputfiles.hex>True</armgcc.common.outputfiles.hex>
+  <armgcc.common.outputfiles.lss>True</armgcc.common.outputfiles.lss>
+  <armgcc.common.outputfiles.eep>True</armgcc.common.outputfiles.eep>
+  <armgcc.common.outputfiles.bin>True</armgcc.common.outputfiles.bin>
+  <armgcc.common.outputfiles.srec>True</armgcc.common.outputfiles.srec>
+  <armgcc.compiler.symbols.DefSymbols>
+    <ListValues>
+      <Value>DEBUG</Value>
+      <Value>FIRMWARE_BOOTLOADER</Value>
+    </ListValues>
+  </armgcc.compiler.symbols.DefSymbols>
+  <armgcc.compiler.directories.IncludePaths>
+    <ListValues>
+      <Value>../../Common/SAMV71_DFP/2.4.182/samv71b/include</Value>
+      <Value>../../Common/CMSIS/include</Value>
+      <Value>../../Common/bsp</Value>
+      <Value>../../Common/bsp/libusb</Value>
+      <Value>../../Common/bsp/libusb/include</Value>
+      <Value>../../Common</Value>
+      <Value>..</Value>
+    </ListValues>
+  </armgcc.compiler.directories.IncludePaths>
+  <armgcc.compiler.optimization.PrepareFunctionsForGarbageCollection>True</armgcc.compiler.optimization.PrepareFunctionsForGarbageCollection>
+  <armgcc.compiler.optimization.DebugLevel>Maximum (-g3)</armgcc.compiler.optimization.DebugLevel>
+  <armgcc.compiler.warnings.AllWarnings>True</armgcc.compiler.warnings.AllWarnings>
+  <armgcc.linker.libraries.LibrarySearchPaths>
+    <ListValues>
+      <Value>%24(ProjectDir)\Device_Startup</Value>
+    </ListValues>
+  </armgcc.linker.libraries.LibrarySearchPaths>
+  <armgcc.linker.optimization.GarbageCollectUnusedSections>True</armgcc.linker.optimization.GarbageCollectUnusedSections>
+  <armgcc.linker.memorysettings.ExternalRAM />
+  <armgcc.linker.miscellaneous.LinkerFlags>-Tsamv71q21b_flash.ld</armgcc.linker.miscellaneous.LinkerFlags>
+  <armgcc.assembler.general.IncludePaths>
+    <ListValues>
+      <Value>%24(PackRepoDir)\atmel\SAMV71_DFP\2.2.129\samv71b\include</Value>
+      <Value>%24(PackRepoDir)\arm\CMSIS\4.2.0\CMSIS\Include\</Value>
+    </ListValues>
+  </armgcc.assembler.general.IncludePaths>
+  <armgcc.assembler.debugging.DebugLevel>Default (-g)</armgcc.assembler.debugging.DebugLevel>
+  <armgcc.preprocessingassembler.general.IncludePaths>
+    <ListValues>
+      <Value>%24(PackRepoDir)\atmel\SAMV71_DFP\2.2.129\samv71b\include</Value>
+      <Value>%24(PackRepoDir)\arm\CMSIS\4.2.0\CMSIS\Include\</Value>
+    </ListValues>
+  </armgcc.preprocessingassembler.general.IncludePaths>
+  <armgcc.preprocessingassembler.debugging.DebugLevel>Default (-Wa,-g)</armgcc.preprocessingassembler.debugging.DebugLevel>
+</ArmGcc>
+    </ToolchainSettings>
+  </PropertyGroup>
+  <ItemGroup>
+    <Compile Include="..\Common\Bldr_Protocol.h">
+      <SubType>compile</SubType>
+      <Link>Bldr_Protocol.h</Link>
+    </Compile>
+    <Compile Include="..\Common\bsp\board.c">
+      <SubType>compile</SubType>
+      <Link>Bootloader\BSP\board.c</Link>
+    </Compile>
+    <Compile Include="..\Common\bsp\board.h">
+      <SubType>compile</SubType>
+      <Link>Bootloader\BSP\board.h</Link>
+    </Compile>
+    <Compile Include="..\Common\bsp\BoardAbstraction.c">
+      <SubType>compile</SubType>
+      <Link>Bootloader\BSP\BoardAbstraction.c</Link>
+    </Compile>
+    <Compile Include="..\Common\bsp\compiler.h">
+      <SubType>compile</SubType>
+      <Link>Bootloader\BSP\compiler.h</Link>
+    </Compile>
+    <Compile Include="..\Common\bsp\dbg_console.c">
+      <SubType>compile</SubType>
+      <Link>Bootloader\BSP\dbg_console.c</Link>
+    </Compile>
+    <Compile Include="..\Common\bsp\dbg_console.h">
+      <SubType>compile</SubType>
+      <Link>Bootloader\BSP\dbg_console.h</Link>
+    </Compile>
+    <Compile Include="..\Common\bsp\efc.c">
+      <SubType>compile</SubType>
+      <Link>Bootloader\BSP\efc.c</Link>
+    </Compile>
+    <Compile Include="..\Common\bsp\efc.h">
+      <SubType>compile</SubType>
+      <Link>Bootloader\BSP\efc.h</Link>
+    </Compile>
+    <Compile Include="..\Common\bsp\flashd.c">
+      <SubType>compile</SubType>
+      <Link>Bootloader\BSP\flashd.c</Link>
+    </Compile>
+    <Compile Include="..\Common\bsp\flashd.h">
+      <SubType>compile</SubType>
+      <Link>Bootloader\BSP\flashd.h</Link>
+    </Compile>
+    <Compile Include="..\Common\bsp\mpu.c">
+      <SubType>compile</SubType>
+      <Link>Bootloader\BSP\mpu.c</Link>
+    </Compile>
+    <Compile Include="..\Common\bsp\mpu.h">
+      <SubType>compile</SubType>
+      <Link>Bootloader\BSP\mpu.h</Link>
+    </Compile>
+    <Compile Include="..\Common\bsp\pio.c">
+      <SubType>compile</SubType>
+      <Link>Bootloader\BSP\pio.c</Link>
+    </Compile>
+    <Compile Include="..\Common\bsp\pio.h">
+      <SubType>compile</SubType>
+      <Link>Bootloader\BSP\pio.h</Link>
+    </Compile>
+    <Compile Include="..\Common\bsp\pmc.c">
+      <SubType>compile</SubType>
+      <Link>Bootloader\BSP\pmc.c</Link>
+    </Compile>
+    <Compile Include="..\Common\bsp\pmc.h">
+      <SubType>compile</SubType>
+      <Link>Bootloader\BSP\pmc.h</Link>
+    </Compile>
+    <Compile Include="..\Common\bsp\syscalls.c">
+      <SubType>compile</SubType>
+      <Link>Bootloader\BSP\syscalls.c</Link>
+    </Compile>
+    <Compile Include="..\Common\bsp\timetick.c">
+      <SubType>compile</SubType>
+      <Link>Bootloader\BSP\timetick.c</Link>
+    </Compile>
+    <Compile Include="..\Common\bsp\timetick.h">
+      <SubType>compile</SubType>
+      <Link>Bootloader\BSP\timetick.h</Link>
+    </Compile>
+    <Compile Include="..\Common\bsp\twi.c">
+      <SubType>compile</SubType>
+      <Link>Bootloader\BSP\twi.c</Link>
+    </Compile>
+    <Compile Include="..\Common\bsp\twi.h">
+      <SubType>compile</SubType>
+      <Link>Bootloader\BSP\twi.h</Link>
+    </Compile>
+    <Compile Include="..\Common\bsp\twid.c">
+      <SubType>compile</SubType>
+      <Link>Bootloader\BSP\twid.c</Link>
+    </Compile>
+    <Compile Include="..\Common\bsp\twid.h">
+      <SubType>compile</SubType>
+      <Link>Bootloader\BSP\twid.h</Link>
+    </Compile>
+    <Compile Include="..\Common\bsp\wdt.c">
+      <SubType>compile</SubType>
+      <Link>Bootloader\BSP\wdt.c</Link>
+    </Compile>
+    <Compile Include="..\Common\bsp\wdt.h">
+      <SubType>compile</SubType>
+      <Link>Bootloader\BSP\wdt.h</Link>
+    </Compile>
+    <Compile Include="..\Common\CRC.c">
+      <SubType>compile</SubType>
+      <Link>CRC.c</Link>
+    </Compile>
+    <Compile Include="..\Common\CRC.h">
+      <SubType>compile</SubType>
+      <Link>CRC.h</Link>
+    </Compile>
+    <Compile Include="..\Common\bsp\libusb\common\core\USBDescriptors.c">
+      <SubType>compile</SubType>
+      <Link>Bootloader\libusb\common\core\USBDescriptors.c</Link>
+    </Compile>
+    <Compile Include="..\Common\bsp\libusb\common\core\USBD_HAL.c">
+      <SubType>compile</SubType>
+      <Link>Bootloader\libusb\common\core\USBD_HAL.c</Link>
+    </Compile>
+    <Compile Include="..\Common\bsp\libusb\common\core\USBRequests.c">
+      <SubType>compile</SubType>
+      <Link>Bootloader\libusb\common\core\USBRequests.c</Link>
+    </Compile>
+    <Compile Include="..\Common\bsp\libusb\device\core\USBD.c">
+      <SubType>compile</SubType>
+      <Link>Bootloader\libusb\device\core\USBD.c</Link>
+    </Compile>
+    <Compile Include="..\Common\bsp\libusb\device\core\USBDDriver.c">
+      <SubType>compile</SubType>
+      <Link>Bootloader\libusb\device\core\USBDDriver.c</Link>
+    </Compile>
+    <Compile Include="..\Common\bsp\libusb\device\core\USBDDriverCallbacks.c">
+      <SubType>compile</SubType>
+      <Link>Bootloader\libusb\device\core\USBDDriverCallbacks.c</Link>
+    </Compile>
+    <Compile Include="..\Common\bsp\libusb\include\USBD.h">
+      <SubType>compile</SubType>
+      <Link>Bootloader\libusb\include\USBD.h</Link>
+    </Compile>
+    <Compile Include="..\Common\bsp\libusb\include\USBDDriver.h">
+      <SubType>compile</SubType>
+      <Link>Bootloader\libusb\include\USBDDriver.h</Link>
+    </Compile>
+    <Compile Include="..\Common\bsp\libusb\include\USBDescriptors.h">
+      <SubType>compile</SubType>
+      <Link>Bootloader\libusb\include\USBDescriptors.h</Link>
+    </Compile>
+    <Compile Include="..\Common\bsp\libusb\include\USBD_Config.h">
+      <SubType>compile</SubType>
+      <Link>Bootloader\libusb\include\USBD_Config.h</Link>
+    </Compile>
+    <Compile Include="..\Common\bsp\libusb\include\USBD_HAL.h">
+      <SubType>compile</SubType>
+      <Link>Bootloader\libusb\include\USBD_HAL.h</Link>
+    </Compile>
+    <Compile Include="..\Common\bsp\libusb\include\USBD_LEDs.h">
+      <SubType>compile</SubType>
+      <Link>Bootloader\libusb\include\USBD_LEDs.h</Link>
+    </Compile>
+    <Compile Include="..\Common\bsp\libusb\include\USBLib_Trace.h">
+      <SubType>compile</SubType>
+      <Link>Bootloader\libusb\include\USBLib_Trace.h</Link>
+    </Compile>
+    <Compile Include="..\Common\bsp\libusb\include\USBLib_Types.h">
+      <SubType>compile</SubType>
+      <Link>Bootloader\libusb\include\USBLib_Types.h</Link>
+    </Compile>
+    <Compile Include="..\Common\bsp\libusb\include\USBRequests.h">
+      <SubType>compile</SubType>
+      <Link>Bootloader\libusb\include\USBRequests.h</Link>
+    </Compile>
+    <Compile Include="..\Common\bsp\libusb\usb.h">
+      <SubType>compile</SubType>
+      <Link>Bootloader\libusb\usb.h</Link>
+    </Compile>
+    <Compile Include="..\Common\bsp\libusb\usbhs.h">
+      <SubType>compile</SubType>
+      <Link>Bootloader\libusb\usbhs.h</Link>
+    </Compile>
+    <Compile Include="Bootloader.c">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="Bootloader.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="config.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="DebugHandler.c">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="Device_Startup\startup_samv71q21b.c">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="Device_Startup\system_samv71q21b.c">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="Main.c">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="USBDDriverDescriptors.c">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="versions.h">
+      <SubType>compile</SubType>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Bootloader\" />
+    <Folder Include="Bootloader\BSP\" />
+    <Folder Include="Bootloader\libusb\" />
+    <Folder Include="Bootloader\libusb\common\" />
+    <Folder Include="Bootloader\libusb\common\core\" />
+    <Folder Include="Bootloader\libusb\device\" />
+    <Folder Include="Bootloader\libusb\device\core\" />
+    <Folder Include="Bootloader\libusb\include\" />
+    <Folder Include="Device_Startup\" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="debughooks.py">
+      <SubType>compile</SubType>
+    </None>
+    <None Include="Device_Startup\samv71q21b_flash.ld">
+      <SubType>compile</SubType>
+    </None>
+  </ItemGroup>
+  <Import Project="$(AVRSTUDIO_EXE_PATH)\\Vs\\Compiler.targets" />
+</Project>
