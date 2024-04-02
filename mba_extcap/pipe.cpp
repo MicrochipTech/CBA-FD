@@ -5,12 +5,12 @@ uint32_t write_pipe(sPipe& pipe, const void* ptr, size_t size)
 {
     DWORD cbWritten = 0;
 
-	if (pipe.init)
+    if (pipe.init)
     {
-		WriteFile(pipe.handle, ptr, static_cast<DWORD>(size), &cbWritten, NULL);
-	}
+        WriteFile(pipe.handle, ptr, static_cast<DWORD>(size), &cbWritten, NULL);
+    }
 
-	return static_cast<uint32_t>(cbWritten);
+    return static_cast<uint32_t>(cbWritten);
 }
 
 bool open_pipe(const settings_t& set, sPipe& pipe)

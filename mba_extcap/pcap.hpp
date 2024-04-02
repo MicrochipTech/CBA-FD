@@ -81,6 +81,30 @@ struct tlv_t
     uint16_t len;
 };
 
+/// <summary>
+/// From socketcan.h
+/// </summary>
+struct can_frame_t
+{
+    uint32_t can_id;
+    uint8_t dlc;
+    uint8_t flags;
+    uint8_t res[2];
+    uint8_t data[64];
+};
+
+enum _t_error_
+{
+    TE_NOERR,
+    TE_STUFFERR,
+    TE_FORMERR,
+    TE_ACKERR,
+    TE_BIT1ERR,
+    TE_BIT0ERR,
+    TE_CRCERR,
+    TE_NOCHANGE
+};
+
 uint32_t pcap_write_file_header(sPipe& pipe, int linktype, int snaplen);
 uint32_t pcap_write_packet(sPipe& pipe, time_t sec, uint32_t usec, uint32_t caplen, uint32_t len, const uint8_t* pd);
 

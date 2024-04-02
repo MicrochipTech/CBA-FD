@@ -29,26 +29,26 @@
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
     <ConfigurationType>Application</ConfigurationType>
     <UseDebugLibraries>true</UseDebugLibraries>
-    <PlatformToolset>v142</PlatformToolset>
+    <PlatformToolset>v143</PlatformToolset>
     <CharacterSet>Unicode</CharacterSet>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
     <ConfigurationType>Application</ConfigurationType>
     <UseDebugLibraries>false</UseDebugLibraries>
-    <PlatformToolset>v142</PlatformToolset>
+    <PlatformToolset>v143</PlatformToolset>
     <WholeProgramOptimization>true</WholeProgramOptimization>
     <CharacterSet>Unicode</CharacterSet>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
     <ConfigurationType>Application</ConfigurationType>
     <UseDebugLibraries>true</UseDebugLibraries>
-    <PlatformToolset>v142</PlatformToolset>
+    <PlatformToolset>v143</PlatformToolset>
     <CharacterSet>Unicode</CharacterSet>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
     <ConfigurationType>Application</ConfigurationType>
     <UseDebugLibraries>false</UseDebugLibraries>
-    <PlatformToolset>v142</PlatformToolset>
+    <PlatformToolset>v143</PlatformToolset>
     <WholeProgramOptimization>true</WholeProgramOptimization>
     <CharacterSet>Unicode</CharacterSet>
   </PropertyGroup>
@@ -93,7 +93,7 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>_DEBUG;_CONSOLE;%(PreprocessorDefinitions);NEXPORT</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>CLI11\include;..\Common;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>CLI11\include\;CLI11\include\CLI;..\Common;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -147,7 +147,7 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>NDEBUG;_CONSOLE;%(PreprocessorDefinitions);NEXPORT</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>CLI11\include;..\Common;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>CLI11\include\;CLI11\include\CLI;..\Common;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -166,6 +166,23 @@
   <ItemGroup>
     <ClInclude Include="..\Common\AbaInterface.h" />
     <ClInclude Include="..\Common\compiler_w.h" />
+    <ClInclude Include="CLI11\include\CLI\App.hpp" />
+    <ClInclude Include="CLI11\include\CLI\Argv.hpp" />
+    <ClInclude Include="CLI11\include\CLI\CLI.hpp" />
+    <ClInclude Include="CLI11\include\CLI\Config.hpp" />
+    <ClInclude Include="CLI11\include\CLI\ConfigFwd.hpp" />
+    <ClInclude Include="CLI11\include\CLI\Encoding.hpp" />
+    <ClInclude Include="CLI11\include\CLI\Error.hpp" />
+    <ClInclude Include="CLI11\include\CLI\Formatter.hpp" />
+    <ClInclude Include="CLI11\include\CLI\FormatterFwd.hpp" />
+    <ClInclude Include="CLI11\include\CLI\Macros.hpp" />
+    <ClInclude Include="CLI11\include\CLI\Option.hpp" />
+    <ClInclude Include="CLI11\include\CLI\Split.hpp" />
+    <ClInclude Include="CLI11\include\CLI\StringTools.hpp" />
+    <ClInclude Include="CLI11\include\CLI\Timer.hpp" />
+    <ClInclude Include="CLI11\include\CLI\TypeTools.hpp" />
+    <ClInclude Include="CLI11\include\CLI\Validators.hpp" />
+    <ClInclude Include="CLI11\include\CLI\Version.hpp" />
     <ClInclude Include="pcap.hpp" />
     <ClInclude Include="pipe.hpp" />
     <ClInclude Include="settings.hpp" />

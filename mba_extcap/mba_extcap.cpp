@@ -2,65 +2,43 @@
 #include <string>
 #include <assert.h>
 #include <stdint.h>
-#include <CLI/CLI.hpp>
+#include <CLI.hpp>
 #include <MbaInterface.h>
 #include "pcap.hpp"
 #include "pipe.hpp"
 
-#include <windows.h>
+#define LINKTYPE_CAN_SOCKETCAN 227u
 
-#define LINKTYPE_CAN_SOCKETCAN 227
+std::string version = "MBA Extcap Version: 1.0.1";
 
 sPipe pipe = {};
 volatile uint32_t terminateLoop = 0;
 volatile uint32_t enableProcessing = 0;
 
-struct can_frame_t
-{
-	uint32_t can_id;
-	uint8_t dlc;
-	uint8_t flags;
-	uint8_t res[2];
-	uint8_t data[64];
-};
-
-enum _t_error_
-{
-    TE_NOERR,
-    TE_STUFFERR,
-    TE_FORMERR,
-    TE_ACKERR,
-    TE_BIT1ERR,
-    TE_BIT0ERR,
-    TE_CRCERR,
-    TE_NOCHANGE
-};
-
 void handle_reply(const mba_message_t* message, void* user_data)
 {
-    if (enableProcessing < 1)
+    if (enableProcessing < 1u)
     {
         return;
     }
  
     uint32_t frameSize;
     uint32_t rc = 0;
-    can_frame_t frame = {};
 
-	switch (message->messageType)
-	{
-	case MBA_CAN:
-		if (message->command == CAN_MSG_RX)
-		{
+    switch (message->messageType)
+    {
+    case MBA_CAN:
+        if (message->command == CAN_MSG_RX)
+        {
+            can_frame_t frame = {};
             auto frame_in = reinterpret_cast<const CanFrame*>(message->data);
             
-			frame.can_id = frame_in->id;
-			frame.dlc = frame_in->dlc;
-			memcpy_s(frame.data, sizeof(frame.data), frame_in->data, frame_in->dlc);
-			frame.flags = frame_in->flags & CANFRAME_FLAG_FD ? 1 : 0;
+            frame.can_id = frame_in->id;
+            frame.dlc = frame_in->dlc;
+            memcpy_s(frame.data, sizeof(frame.data), frame_in->data, frame_in->dlc);
+            frame.flags = frame_in->flags & CANFRAME_FLAG_FD ? 1 : 0;
 
-            if (frame_in->flags & CANFRAME_FLAG_EXTENDED)
-            {
+            if (frame_in->flags & CANFRAME_FLAG_EXTENDED) {
                 frame.can_id |= CAN_EFF_FLAG; // Set extended
             }
             frame.can_id = _byteswap_ulong(frame.can_id);
@@ -70,8 +48,9 @@ void handle_reply(const mba_message_t* message, void* user_data)
             if (rc == 0)
                 terminateLoop = 1;
         }
-		else if (message->command == CAN_MSG_ERR)
+        else if (message->command == CAN_MSG_ERR)
         {
+            can_frame_t frame = {};
             auto frame_in = reinterpret_cast<const CanError*>(message->data);
 
             frame.can_id = CAN_ERR_FLAG; // Set error frame
@@ -157,34 +136,34 @@ void handle_reply(const mba_message_t* message, void* user_data)
 
             frameSize = 8u + frame.dlc;
             rc = pcapng_write_enhanced_packet(pipe, frame_in->busId, frame_in->timestamp >> 32, frame_in->timestamp & 0xFFFFFFFF, frameSize, reinterpret_cast<const uint8_t*>(&frame));
-            if (rc == 0)
+            if (rc == 0) {
                 terminateLoop = 1;
+            }
         }
-
-		break;
-	case MBA_CORE:
+        break;
+    case MBA_CORE:
         terminateLoop = 1;
         break;
-	}
+    }
 }
 
 static int32_t printInterfaces()
 {
     mba_device_t* device_list = nullptr;
-	int32_t numDevices = enumDevices(&device_list);
+    int32_t numDevices = enumDevices(&device_list);
 
-	std::cout << "extcap {version=1.0}" << std::endl;
+    std::cout << "extcap {version=1.0}" << std::endl;
 
-	for (int32_t i = 0; i < numDevices; i++)
-	{
-		std::cout << "interface {value="
-			<< reinterpret_cast<char*>(device_list[i].serial.octet)
-			<< "}{display=Microchip CAN Bus Analyzer ("
-			<< reinterpret_cast<char*>(device_list[i].serial.octet)
-			<< ")}" << std::endl;
-	}
+    for (int32_t i = 0; i < numDevices; i++)
+    {
+        std::cout << "interface {value=CAN_"
+            << reinterpret_cast<char*>(device_list[i].serial.octet)
+            << "}{display=Microchip CAN Bus Analyzer ("
+            << reinterpret_cast<char*>(device_list[i].serial.octet)
+            << ")}" << std::endl;
+    }
 
-	return numDevices;
+    return numDevices;
 }
 
 static int32_t startCapture(const settings_t& set)
@@ -193,9 +172,25 @@ static int32_t startCapture(const settings_t& set)
 
     if (rc)
     {
+        int32_t type = 0;
         mba_serial_t serial = {};
         mba_handle_t* mba_device = nullptr;
-        strcpy_s((char*)serial.octet, sizeof(serial.octet), set.iface.c_str());
+
+        size_t sp = set.iface.find('_');
+        if (sp != std::string::npos)
+        {
+            std::string prefix = set.iface.substr(0, sp);
+            std::string interface = set.iface.substr(sp + 1u);
+            strcpy_s(reinterpret_cast<char*>(serial.octet), sizeof(serial.octet), interface.c_str());
+
+            if (prefix == "CAN") {
+                type = 1u;
+            }
+        }
+
+        if (type == 0) {
+            return -1;
+        }
 
         registerCallback(handle_reply, 0);
         if (E_OK == openDevice(&mba_device, &serial))
@@ -212,7 +207,7 @@ static int32_t startCapture(const settings_t& set)
 
             enableProcessing = 1;
 
-            if (set.ack) {
+            if (set.ack == "true") {
                 CAN_SetMode(mba_device, CAN_BUS_0, CAN_MODE_FDISO, CAN_TESTMODE_NORMAL, 0);
                 CAN_SetMode(mba_device, CAN_BUS_1, CAN_MODE_FDISO, CAN_TESTMODE_NORMAL, 0);
             } else {
@@ -226,53 +221,53 @@ static int32_t startCapture(const settings_t& set)
         }
     }
 
-	return 0;
+    return 0;
 }
 
 static int32_t showConfig(const settings_t& set)
 {
-	std::cout << "arg {number=0}{call=--nspeed0}{display=CAN0: nominal speed}{type=selector}" << std::endl
-		<< "value {arg=0}{value=100}{display=100kBit/s}{default=false}"     << std::endl
-		<< "value {arg=0}{value=125}{display=125kBit/s}{default=false}"     << std::endl
-		<< "value {arg=0}{value=250}{display=250kBit/s}{default=false}"     << std::endl
-		<< "value {arg=0}{value=500}{display=500kBit/s}{default=true}"      << std::endl
-		<< "value {arg=0}{value=1000}{display=1000kBit/s}{default=false}"   << std::endl;
+    std::cout << "arg {number=0}{call=--nspeed0}{display=CAN0: nominal speed}{type=selector}" << std::endl
+        << "value {arg=0}{value=100}{display=100kBit/s}{default=false}"     << std::endl
+        << "value {arg=0}{value=125}{display=125kBit/s}{default=false}"     << std::endl
+        << "value {arg=0}{value=250}{display=250kBit/s}{default=false}"     << std::endl
+        << "value {arg=0}{value=500}{display=500kBit/s}{default=true}"      << std::endl
+        << "value {arg=0}{value=1000}{display=1000kBit/s}{default=false}"   << std::endl;
 
-	std::cout
-		<< "arg {number=1}{call=--dspeed0}{display=CAN0: data speed}{type=selector}" << std::endl
-		<< "value {arg=1}{value=1000}{display=1000kBit/s}{default=false}"   << std::endl
-		<< "value {arg=1}{value=2000}{display=2000kBit/s}{default=true}"    << std::endl
-		<< "value {arg=1}{value=3077}{display=3077kBit/s}{default=false}"   << std::endl
-		<< "value {arg=1}{value=4000}{display=4000kBit/s}{default=false}"   << std::endl
-		<< "value {arg=1}{value=5000}{display=5000kBit/s}{default=false}"   << std::endl
-		<< "value {arg=1}{value=6667}{display=6667kBit/s}{default=false}"   << std::endl
-		<< "value {arg=1}{value=8000}{display=8000kBit/s}{default=false}"   << std::endl;
+    std::cout
+        << "arg {number=1}{call=--dspeed0}{display=CAN0: data speed}{type=selector}" << std::endl
+        << "value {arg=1}{value=1000}{display=1000kBit/s}{default=false}"   << std::endl
+        << "value {arg=1}{value=2000}{display=2000kBit/s}{default=true}"    << std::endl
+        << "value {arg=1}{value=3077}{display=3077kBit/s}{default=false}"   << std::endl
+        << "value {arg=1}{value=4000}{display=4000kBit/s}{default=false}"   << std::endl
+        << "value {arg=1}{value=5000}{display=5000kBit/s}{default=false}"   << std::endl
+        << "value {arg=1}{value=6667}{display=6667kBit/s}{default=false}"   << std::endl
+        << "value {arg=1}{value=8000}{display=8000kBit/s}{default=false}"   << std::endl;
 
-	std::cout << "arg {number=2}{call=--nspeed1}{display=CAN1: nominal speed}{type=selector}" << std::endl
-		<< "value {arg=2}{value=100}{display=100kBit/s}{default=false}"     << std::endl
-		<< "value {arg=2}{value=125}{display=125kBit/s}{default=false}"     << std::endl
-		<< "value {arg=2}{value=250}{display=250kBit/s}{default=false}"     << std::endl
-		<< "value {arg=2}{value=500}{display=500kBit/s}{default=true}"      << std::endl
-		<< "value {arg=2}{value=1000}{display=1000kBit/s}{default=false}"   << std::endl;
+    std::cout << "arg {number=2}{call=--nspeed1}{display=CAN1: nominal speed}{type=selector}" << std::endl
+        << "value {arg=2}{value=100}{display=100kBit/s}{default=false}"     << std::endl
+        << "value {arg=2}{value=125}{display=125kBit/s}{default=false}"     << std::endl
+        << "value {arg=2}{value=250}{display=250kBit/s}{default=false}"     << std::endl
+        << "value {arg=2}{value=500}{display=500kBit/s}{default=true}"      << std::endl
+        << "value {arg=2}{value=1000}{display=1000kBit/s}{default=false}"   << std::endl;
 
-	std::cout << "arg {number=3}{call=--dspeed1}{display=CAN1: data speed}{type=selector}" << std::endl
-		<< "value {arg=3}{value=1000}{display=1000kBit/s}{default=false}"   << std::endl
-		<< "value {arg=3}{value=2000}{display=2000kBit/s}{default=true}"    << std::endl
-		<< "value {arg=3}{value=3077}{display=3077kBit/s}{default=false}"   << std::endl
-		<< "value {arg=3}{value=4000}{display=4000kBit/s}{default=false}"   << std::endl
-		<< "value {arg=3}{value=5000}{display=5000kBit/s}{default=false}"   << std::endl
-		<< "value {arg=3}{value=6667}{display=6667kBit/s}{default=false}"   << std::endl
-		<< "value {arg=3}{value=8000}{display=8000kBit/s}{default=false}"   << std::endl;
+    std::cout << "arg {number=3}{call=--dspeed1}{display=CAN1: data speed}{type=selector}" << std::endl
+        << "value {arg=3}{value=1000}{display=1000kBit/s}{default=false}"   << std::endl
+        << "value {arg=3}{value=2000}{display=2000kBit/s}{default=true}"    << std::endl
+        << "value {arg=3}{value=3077}{display=3077kBit/s}{default=false}"   << std::endl
+        << "value {arg=3}{value=4000}{display=4000kBit/s}{default=false}"   << std::endl
+        << "value {arg=3}{value=5000}{display=5000kBit/s}{default=false}"   << std::endl
+        << "value {arg=3}{value=6667}{display=6667kBit/s}{default=false}"   << std::endl
+        << "value {arg=3}{value=8000}{display=8000kBit/s}{default=false}"   << std::endl;
 
     std::cout << "arg {number=4}{call=--ack}{display=Send acknowledgments}{type=boolean}" << std::endl;
 
-	return 0;
+    return 0;
 }
 
 static int32_t showDlts(const settings_t& set)
 {
-	std::cout << "dlt {number=227}{name=Microchip CAN Analyzer}{display=CAN/CAN-FD}" << std::endl;
-	return 0;
+    std::cout << "dlt {number=227}{name=Microchip CAN Analyzer}{display=CAN/CAN-FD}" << std::endl;
+    return 0;
 }
 
 int main(int argc, char* argv[])
@@ -280,42 +275,49 @@ int main(int argc, char* argv[])
     for (int i = 0; i < argc; i++)
         OutputDebugStringA(argv[i]);
 
-    if ((argc == 2 || argc == 3) && _strcmpi(argv[1], "--extcap-interfaces") == 0) {
-		printInterfaces();
-		return 0;
-	}
-
-	int32_t ret = -1;
-	int32_t iDlts = 0;
-	int32_t iConfig = 0;
-	int32_t iCapture = 0;
-	std::string strInterface = "";
-
+    int32_t ret = -1;
     settings_t settings = {};
-	CLI::App extcap{ "Microchip Bus Analyzer" };
-	extcap.add_option("--extcap-interface", settings.iface, "")->required();
-	extcap.add_flag("--extcap-dlts", iDlts);
-	extcap.add_flag("--extcap-config", iConfig);
-	extcap.add_option("--fifo", settings.pipe)->required();
+    CLI::App extcap{ "Microchip Bus Analyzer" };
+    auto vers = extcap.add_flag("-v,--version");
+    auto dlts = extcap.add_flag("--extcap-dlts");
+    auto intf = extcap.add_flag("--extcap-interfaces");
+    extcap.add_flag("--extcap-version");
 
-	auto ec_capture = extcap.add_flag("--capture", iCapture);
-	ec_capture->needs(extcap.add_option("--nspeed0", settings.nspeed0)->default_val("500"));
-	ec_capture->needs(extcap.add_option("--dspeed0", settings.dspeed0)->default_val("2000"));
-	ec_capture->needs(extcap.add_option("--nspeed1", settings.nspeed1)->default_val("500"));
-	ec_capture->needs(extcap.add_option("--dspeed1", settings.dspeed1)->default_val("2000"));
-    ec_capture->needs(extcap.add_option("--ack", settings.ack)->default_val("0"));
+    //
+    auto conf = extcap.add_subcommand("extcap-config");
+    conf->alias("--extcap-config");
+    conf->add_option("--extcap-interface", settings.iface)->required();
 
-	CLI11_PARSE(extcap, argc, argv);
+    //
+    auto* capt = extcap.add_subcommand("capture");
+    capt->alias("--capture");
+    capt->add_option("--extcap-interface", settings.iface)->required();
+    capt->add_option("--nspeed0", settings.nspeed0)->default_val(500);
+    capt->add_option("--dspeed0", settings.dspeed0)->default_val(2000);
+    capt->add_option("--nspeed1", settings.nspeed1)->default_val(500);
+    capt->add_option("--dspeed1", settings.dspeed1)->default_val(2000);
+    capt->add_option("--fifo", settings.pipe)->required();
+    capt->add_option("--ack", settings.ack)->default_str("false");   
 
-	if (iCapture) {
-		ret = startCapture(settings);
-	}
-	else if (iConfig) {
-		ret = showConfig(settings);
-	}
-	else if (iDlts) {
-		ret = showDlts(settings);
-	}
+    CLI11_PARSE(extcap, argc, argv);
+    if (intf->count()) {
+        // Wireshark requires returncode 0 on success
+        ret = printInterfaces() ? 0 : 1;
+    }
+    else if (vers->count())
+    {
+        std::cout << version << std::endl;
+        ret = 0;
+    }
+    else if (dlts->count()) {
+        ret = showDlts(settings);
+    }
+    else if(capt->count()) {
+        ret = startCapture(settings);
+    }
+    else if (conf->count()) {
+        ret = showConfig(settings);
+    }
 
-	return ret;
+    return ret;
 }

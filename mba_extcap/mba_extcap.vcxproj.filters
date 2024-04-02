@@ -13,6 +13,9 @@
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
+    <Filter Include="Header Files\CLI">
+      <UniqueIdentifier>{9844856d-ff22-4986-a741-f1397139f54f}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="mba_extcap.cpp">
@@ -40,6 +43,57 @@
     </ClInclude>
     <ClInclude Include="settings.hpp">
       <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="CLI11\include\CLI\CLI.hpp">
+      <Filter>Header Files\CLI</Filter>
+    </ClInclude>
+    <ClInclude Include="CLI11\include\CLI\Config.hpp">
+      <Filter>Header Files\CLI</Filter>
+    </ClInclude>
+    <ClInclude Include="CLI11\include\CLI\ConfigFwd.hpp">
+      <Filter>Header Files\CLI</Filter>
+    </ClInclude>
+    <ClInclude Include="CLI11\include\CLI\Encoding.hpp">
+      <Filter>Header Files\CLI</Filter>
+    </ClInclude>
+    <ClInclude Include="CLI11\include\CLI\Error.hpp">
+      <Filter>Header Files\CLI</Filter>
+    </ClInclude>
+    <ClInclude Include="CLI11\include\CLI\Formatter.hpp">
+      <Filter>Header Files\CLI</Filter>
+    </ClInclude>
+    <ClInclude Include="CLI11\include\CLI\FormatterFwd.hpp">
+      <Filter>Header Files\CLI</Filter>
+    </ClInclude>
+    <ClInclude Include="CLI11\include\CLI\Macros.hpp">
+      <Filter>Header Files\CLI</Filter>
+    </ClInclude>
+    <ClInclude Include="CLI11\include\CLI\Option.hpp">
+      <Filter>Header Files\CLI</Filter>
+    </ClInclude>
+    <ClInclude Include="CLI11\include\CLI\Split.hpp">
+      <Filter>Header Files\CLI</Filter>
+    </ClInclude>
+    <ClInclude Include="CLI11\include\CLI\StringTools.hpp">
+      <Filter>Header Files\CLI</Filter>
+    </ClInclude>
+    <ClInclude Include="CLI11\include\CLI\Timer.hpp">
+      <Filter>Header Files\CLI</Filter>
+    </ClInclude>
+    <ClInclude Include="CLI11\include\CLI\TypeTools.hpp">
+      <Filter>Header Files\CLI</Filter>
+    </ClInclude>
+    <ClInclude Include="CLI11\include\CLI\Validators.hpp">
+      <Filter>Header Files\CLI</Filter>
+    </ClInclude>
+    <ClInclude Include="CLI11\include\CLI\Version.hpp">
+      <Filter>Header Files\CLI</Filter>
+    </ClInclude>
+    <ClInclude Include="CLI11\include\CLI\App.hpp">
+      <Filter>Header Files\CLI</Filter>
+    </ClInclude>
+    <ClInclude Include="CLI11\include\CLI\Argv.hpp">
+      <Filter>Header Files\CLI</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

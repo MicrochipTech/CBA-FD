@@ -4,6 +4,7 @@ Project {
 
 		IncludeDir "."
 		IncludeDir "CLI11/include"
+		IncludeDir "CLI11/include/CLI"
 		IncludeDir "../Common"
 
 		Files "**.cpp"
@@ -53,6 +54,30 @@ Project {
 		}
 
 		ArtifactName "../../../Release/$(MainProjectName).exe"
+	}
+	
+	ExecutableConfig Debug_Windows_MSVC, extends: Files {
+
+		ExternalLibrary "MbaInterface.lib"
+		
+		ExternalLibrarySearchPath "../Debug"
+
+		DefaultToolchain MSVC {
+
+			Compiler CPP  {
+				Flags "/W3 /WX- /Od /std:c++17"
+			}
+
+			Compiler C {
+				Flags "/W3 /WX- /Od"
+			}
+
+			Linker {
+				Flags "/NXCOMPAT"
+			}
+		}
+
+		ArtifactName "../../../Debug/$(MainProjectName).exe"
 	}
 	
 	ExecutableConfig Release_Windows_MSVC, extends: Files {

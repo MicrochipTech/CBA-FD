@@ -5,7 +5,7 @@
 
 struct settings_t
 {
-    uint32_t ack;
+    std::string ack;
     uint32_t dspeed0;
     uint32_t nspeed0;
     uint32_t dspeed1;

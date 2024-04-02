@@ -1,4 +1,4 @@
-#include <string>
+#include <cstring>
 #include "pcap.hpp"
 #include "pipe.hpp"
 
@@ -6,31 +6,31 @@
 
 uint32_t pcap_write_file_header(sPipe& pipe, int linktype, int snaplen)
 {
-	pcap_hdr_t file_hdr;
+    pcap_hdr_t file_hdr;
 
-	file_hdr.magic = PCAP_MAGIC;
-	file_hdr.version = 2 << 16u | 4u;
-	file_hdr.timeoffset = 0;
-	file_hdr.accuracy = 0;
-	file_hdr.maxlen = snaplen;
-	file_hdr.network = linktype;
+    file_hdr.magic = PCAP_MAGIC;
+    file_hdr.version = 2 << 16u | 4u;
+    file_hdr.timeoffset = 0;
+    file_hdr.accuracy = 0;
+    file_hdr.maxlen = snaplen;
+    file_hdr.network = linktype;
 
-	return write_pipe(pipe, reinterpret_cast<const uint8_t*>(&file_hdr), sizeof(file_hdr));
+    return write_pipe(pipe, reinterpret_cast<const uint8_t*>(&file_hdr), sizeof(file_hdr));
 }
 
 uint32_t pcap_write_packet(sPipe& pipe, time_t sec, uint32_t usec, uint32_t caplen, uint32_t len, const uint8_t* pd)
 {
-	pcaprec_hdr rec_hdr;
+    pcaprec_hdr rec_hdr;
 
-	rec_hdr.ts_sec = static_cast<uint32_t>(sec);
-	rec_hdr.ts_usec = usec;
-	rec_hdr.incl_len = caplen;
-	rec_hdr.orig_len = len;
+    rec_hdr.ts_sec = static_cast<uint32_t>(sec);
+    rec_hdr.ts_usec = usec;
+    rec_hdr.incl_len = caplen;
+    rec_hdr.orig_len = len;
 
-	if (!write_pipe(pipe, reinterpret_cast<const uint8_t*>(&rec_hdr), sizeof(rec_hdr)))
-		return 0;
+    if (!write_pipe(pipe, reinterpret_cast<const uint8_t*>(&rec_hdr), sizeof(rec_hdr)))
+        return 0;
 
-	return write_pipe(pipe, pd, caplen);
+    return write_pipe(pipe, pd, caplen);
 }
 
 
@@ -49,7 +49,7 @@ uint32_t pcapng_write_block(sPipe& pipe, uint32_t blockType, uint32_t blockLen, 
     *block_len2 = blockLen;
 
     memcpy(&buffer[8], data, blockLen);         // Todo: Check if it can replaced by 2 calls to write_pipe instead of doing memcpy first
-    memset(&buffer[8llu + blockLen], 0, pad);
+    memset(&buffer[8 + blockLen], 0, pad);
 
     uint32_t ret = write_pipe(pipe, buffer, 12llu + blockLen + pad);
 
