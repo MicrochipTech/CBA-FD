@@ -55,12 +55,13 @@ enum CAN_TESTMODE
 
 enum CAN_BUS
 {
-    CAN_BUS_0 = 0,                      ///< CAN bus 0
+    CAN_BUS_MIN = 0,                    ///< Always returns the first CAN bus
+    CAN_BUS_0 = CAN_BUS_MIN,            ///< CAN bus 0
     CAN_BUS_1,                          ///< CAN bus 1
     CAN_BUS_MAX                         ///< Maximum number of CAN busses
 };
 
-#if 0
+#if DEFINE_CAN_SPEED
 enum CAN_SPEED
 {
     CAN_SPEED_100 = 100,                ///< Nominal CAN speed 100kBit/s
@@ -306,7 +307,7 @@ extern "C" {
     * @result E_DEV when trying to send a CAN frame on incapable hardware
     * @result E_ERR if USB communication failed
     */
-    DLL_EXPORT int32_t CAN_SendFrame(mba_handle_t* mba_device, CAN_BUS busId, uint32_t canId, uint8_t* payload, uint8_t dlc, uint8_t flags, uint16_t timeout);
+    DLL_EXPORT int32_t CAN_SendFrame(mba_handle_t* mba_device, CAN_BUS busId, uint32_t canId, const uint8_t* payload, uint8_t dlc, uint8_t flags, uint16_t timeout);
 
     /**
     * Send multiple CAN frames using a single USB transaction.
@@ -320,7 +321,7 @@ extern "C" {
     * @result E_DEV when trying to send a CAN frame on incapable hardware
     * @result E_ERR if USB communication failed
     */
-    DLL_EXPORT int32_t CAN_SendFramesBulk(mba_handle_t* mba_device, CanFrame* frames, uint32_t count);
+    DLL_EXPORT int32_t CAN_SendFramesBulk(mba_handle_t* mba_device, const CanFrame* frames, uint32_t count);
 
     /**
     * Set the CAN speed of a channel.
@@ -349,7 +350,7 @@ extern "C" {
     * @result E_DEV when trying to send a CAN frame on incapable hardware
     * @result E_ERR if USB communication failed
     */
-    DLL_EXPORT int32_t CAN_SetBitTiming(mba_handle_t* mba_device, CAN_BUS busId, CanBitrate* bitrate);
+    DLL_EXPORT int32_t CAN_SetBitTiming(mba_handle_t* mba_device, CAN_BUS busId, const CanBitrate* bitrate);
 
     /**
     * Get the CAN bit-timing of a channel.
@@ -425,6 +426,9 @@ extern "C" {
 
     /**
     * Query the MBA firmware version
+	* Updated versions of the library will return a non negative number when nullptr is passed as argument,
+	* this reflects the version of the MBA library. Older versions will return E_ARG error instead.
+	* A populated info structure @ref mba_version_t will be received by the callback handler when a valid device was specified.
     * @param mba_device Handle to the device created by @ref openDevice
     * @result E_OK on success
     * @result E_ARG if mba_device is invalid

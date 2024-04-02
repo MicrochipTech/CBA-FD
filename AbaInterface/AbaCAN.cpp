@@ -158,7 +158,7 @@ namespace aba::can
         }
     };
 
-	int32_t sendFrame(mba_handle_t* aba_device, CAN_BUS busId, uint32_t canId, uint8_t* payload, uint8_t dlc, uint8_t flags, uint16_t timeout)
+	int32_t sendFrame(mba_handle_t* aba_device, CAN_BUS busId, uint32_t canId, const uint8_t* payload, uint8_t dlc, uint8_t flags, uint16_t timeout)
 	{
 		int32_t ret = E_ERR;
 		USBCMDObject* uco = new USBCMDObject();
@@ -169,7 +169,7 @@ namespace aba::can
 		return ret;
 	}
 
-    int32_t sendFrameBulk(mba_handle_t* aba_device, CanFrame* frame_ptr, uint32_t frame_cnt)
+    int32_t sendFrameBulk(mba_handle_t* aba_device, const CanFrame* frame_ptr, uint32_t frame_cnt)
     {
         if (frame_cnt > 32) {
             return E_ARG;
@@ -188,14 +188,14 @@ namespace aba::can
         return aba::usb::transferSubmit(aba_device, buf);
     }
 
-    int32_t setBitTiming(mba_handle_t* mba_device, CAN_BUS busId, CanBitrate* bitrate)
+    int32_t setBitTiming(mba_handle_t* mba_device, CAN_BUS busId, const CanBitrate* bitrate)
     {
         int32_t ret = E_ERR;
         USBCMDObject* uco = new USBCMDObject();
 
         if (CAN_SetBitTiming(uco, busId, bitrate))
         {
-            if (busId < CAN_BUS_MAX)
+            if ((uint8_t)busId < CAN_BUS_MAX)
             {
                 mba_device->m_canBitrate[busId] = *bitrate;
             }
@@ -268,7 +268,7 @@ namespace aba::can
 		USBCMDObject* uco = new USBCMDObject();
 		if (CAN_SetMode(uco, busId, canMode, testMode, autoRetryEnabled))
 		{
-            if (busId < CAN_BUS_MAX)
+            if ((uint8_t)busId < CAN_BUS_MAX)
             {
                 mba->m_canMode[busId].mode = canMode;
                 mba->m_canMode[busId].testMode = testMode;

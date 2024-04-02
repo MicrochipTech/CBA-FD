@@ -1,6 +1,6 @@
 /*                                                                              */
 /*                                                                              */
-/* © 2016 Microchip Technology Inc. and its subsidiaries.                       */
+/* Â© 2016 Microchip Technology Inc. and its subsidiaries.                       */
 /*                                                                              */
 /* Subject to your compliance with these terms, you may use Microchip software  */
 /* and any derivatives exclusively with Microchip products. It is your          */
@@ -33,6 +33,7 @@ This file contains the library exported functions
 #include "AbaUSB.h"
 #include "AbaCAN.h"
 #include "AbaApi.h"
+#include "versions.h"
 #include <mutex>
 #include <deque>
 #include <set>
@@ -271,6 +272,9 @@ extern "C"
 
     DLL_EXPORT int32_t MBA_GetVersion(mba_handle_t* mba_device)
     {
+		if(mba_device == nullptr) {
+			return ABA_DRIVER_VERSION;
+		}
         int32_t rc = verifyParameter(mba_device, DEVICE_ABA | DEVICE_CBA);
         return (E_OK != rc) ? rc : aba::api::getFirmwareVersion(mba_device);
     };
@@ -281,13 +285,13 @@ extern "C"
         return (E_OK != rc) ? rc : aba::api::twinkle(mba_device);
     }
 
-	DLL_EXPORT int32_t CAN_SendFrame(mba_handle_t* mba_device, CAN_BUS busId, uint32_t canId, uint8_t* payload, uint8_t dlc, uint8_t flags, uint16_t timeout)
+	DLL_EXPORT int32_t CAN_SendFrame(mba_handle_t* mba_device, CAN_BUS busId, uint32_t canId, const uint8_t* payload, uint8_t dlc, uint8_t flags, uint16_t timeout)
 	{
 		int32_t rc = verifyParameter(mba_device, DEVICE_ABA | DEVICE_CBA);
 		return (E_OK != rc) ? rc : aba::can::sendFrame(mba_device, busId, canId, payload, dlc, flags, timeout);
 	}
 
-    DLL_EXPORT int32_t CAN_SendFramesBulk(mba_handle_t* mba_device, CanFrame* frames, uint32_t count)
+    DLL_EXPORT int32_t CAN_SendFramesBulk(mba_handle_t* mba_device, const CanFrame* frames, uint32_t count)
     {
         int32_t rc = verifyParameter(mba_device, DEVICE_ABA | DEVICE_CBA);
         return (E_OK != rc) ? rc : aba::can::sendFrameBulk(mba_device, frames, count);
@@ -299,7 +303,7 @@ extern "C"
 		return (E_OK != rc) ? rc : aba::can::setSpeed(mba_device, busId, canSpeed, canFdSpeed);
 	}
 
-    DLL_EXPORT int32_t CAN_SetBitTiming(mba_handle_t* mba_device, CAN_BUS busId, CanBitrate* bitrate)
+    DLL_EXPORT int32_t CAN_SetBitTiming(mba_handle_t* mba_device, CAN_BUS busId, const CanBitrate* bitrate)
     {
         int32_t rc = verifyParameter(mba_device, DEVICE_ABA | DEVICE_CBA);
         return (E_OK != rc) ? rc : aba::can::setBitTiming(mba_device, busId, bitrate);

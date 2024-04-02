@@ -29,9 +29,9 @@
 
 namespace aba::can
 {
-	int32_t sendFrame(mba_handle_t* aba_device, CAN_BUS busId, uint32_t canId, uint8_t* payload, uint8_t dlc, uint8_t flags, uint16_t timeout);
-    int32_t sendFrameBulk(mba_handle_t* aba_device, CanFrame* frame_ptr, uint32_t frame_cnt);
-    int32_t setBitTiming(mba_handle_t* mba_device, CAN_BUS busId, CanBitrate* bitrate);
+	int32_t sendFrame(mba_handle_t* aba_device, CAN_BUS busId, uint32_t canId, const uint8_t* payload, uint8_t dlc, uint8_t flags, uint16_t timeout);
+    int32_t sendFrameBulk(mba_handle_t* aba_device, const CanFrame* frame_ptr, uint32_t frame_cnt);
+    int32_t setBitTiming(mba_handle_t* mba_device, CAN_BUS busId, const CanBitrate* bitrate);
     int32_t getBitTiming(mba_handle_t* mba_device, CAN_BUS busId);
     int32_t setSpeed(mba_handle_t* aba_device, CAN_BUS busId, uint32_t canSpeed, uint32_t canFdSpeed);
 	int32_t setMode(mba_handle_t* aba_device, CAN_BUS busId, uint8_t canMode, uint8_t testMode, uint8_t autoRetryEnabled);

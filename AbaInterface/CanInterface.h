@@ -64,7 +64,7 @@ enum canFdSpeeds
 	CANFD_SPEED_MAX,
 };
 
-bool CAN_SetBitTiming(USBCMDObject* uco, CAN_BUS canBus, CanBitrate* bitrate);
+bool CAN_SetBitTiming(USBCMDObject* uco, CAN_BUS canBus, const CanBitrate* bitrate);
 bool CAN_GetBitTiming(USBCMDObject* uco, CAN_BUS canBus);
 bool CAN_SetSpeed(USBCMDObject* uco, CAN_BUS canBus, canSpeeds canSpeed, canFdSpeeds canFdSpeed);
 bool CAN_SetMode(USBCMDObject* uco, CAN_BUS canBus, uint8_t canMode, uint8_t testMode, uint8_t autoRetryEnabled);

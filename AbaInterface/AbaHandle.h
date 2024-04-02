@@ -65,7 +65,8 @@ public:
     mba_statistics_t m_stats;
     CON_STATUS m_connection_status;
 
-    uint32_t m_canBusCount;
+    uint8_t m_canBusCount;
+	uint8_t m_cxpiBusCount;
     CanBitrate* m_canBitrate;
     CanMode* m_canMode;
  

@@ -126,7 +126,7 @@ bool CAN_SetMode(USBCMDObject* uco, CAN_BUS canBus, uint8_t canMode, uint8_t tes
     return encodeOutputStream(uco, aba_can_CanMode_fields, &cs);
 }
 
-bool CAN_SetBitTiming(USBCMDObject* uco, CAN_BUS canBus, CanBitrate* bitrate)
+bool CAN_SetBitTiming(USBCMDObject* uco, CAN_BUS canBus, const CanBitrate* bitrate)
 {
     assert(uco != nullptr);
 
